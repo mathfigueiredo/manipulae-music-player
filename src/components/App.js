@@ -1,8 +1,13 @@
 import React from 'react';
+import Fetch from './Fecth';
 
-class App extends React.Componet {
+class App extends React.Component {
   render() {
-    return <div>App</div>;
+    return (
+      <div>
+        <Fetch />
+      </div>
+    );
   }
 }
 
