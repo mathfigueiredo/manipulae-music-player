@@ -9,6 +9,7 @@ class SongsList extends React.Component {
       return (
         <SongCard
           key={song.id}
+          song={song}
           id={song.id}
           title={song.title}
           duration={song.duration}
