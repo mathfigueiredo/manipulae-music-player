@@ -2,21 +2,26 @@ import React from 'react';
 import SearchBar from '../components/SearchBar';
 import deezer from '../api/deezer';
 import { connect } from 'react-redux';
-import { fetchPopular } from '../actions';
+import { fetchPopular, fetchSearchResults, deleteSearch } from '../actions';
 
 class Home extends React.Component {
   componentDidMount() {
     this.props.fetchPopular();
   }
 
-  //   fetchTrack = () => {
-  //     deezer.get('/playlist/948759923').then((res) => console.log(res.data));
-  //   };
+  onSearchChange = (e) => {
+    if (e.target.value !== '') {
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = setTimeout(() => this.props.fetchSearchResults(e), 500);
+    } else {
+      this.props.deleteSearch();
+    }
+  };
 
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchChange={this.onSearchChange} />
       </div>
     );
   }
@@ -28,4 +33,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchPopular })(Home);
+export default connect(mapStateToProps, { fetchPopular, fetchSearchResults, deleteSearch })(Home);
