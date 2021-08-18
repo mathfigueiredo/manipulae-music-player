@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { fetchSearchResults } from '../actions';
 import deezer from '../api/deezer';
 
 class SearchBar extends React.Component {
@@ -11,11 +12,7 @@ class SearchBar extends React.Component {
   onSearchChange = (e) => {
     if (e.target.value !== '') {
       if (this.timer) clearTimeout(this.timer);
-      this.timer = setTimeout(() => {
-        deezer
-          .get('/search', { params: { q: e.target.value } })
-          .then((res) => console.log(res.data));
-      }, 500);
+      this.timer = setTimeout(() => this.props.fetchSearchResults(e), 500);
     }
   };
 
@@ -32,4 +29,4 @@ const form = reduxForm({
   form: 'searchForm',
 })(SearchBar);
 
-export default form;
+export default connect(null, { fetchSearchResults })(form);
