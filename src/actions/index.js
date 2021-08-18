@@ -14,6 +14,10 @@ export const fetchSearchResults = (e) => {
     const response = await deezer.get('/search', { params: { q: e.target.value } });
     console.log(response.data);
 
-    dispatch({ type: 'FETCH_SEARCH', payload: response.data });
+    dispatch({ type: 'FETCH_SEARCH', payload: response.data.data });
   };
+};
+
+export const deleteSearch = () => {
+  return { type: 'DELETE_SEARCH' };
 };
