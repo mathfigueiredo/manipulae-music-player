@@ -1,5 +1,6 @@
 import React from 'react';
-import FavButton from './FavButton';
+import FavButton from './icons/FavButton';
+import Player from './Player';
 
 class SongCard extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class SongCard extends React.Component {
         <div>{title}</div>
         <div>{`${minutes}:${seconds}`}</div>
         <div>{artist.name}</div>
+        <Player />
         <FavButton />
       </div>
     );
