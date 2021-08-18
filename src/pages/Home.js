@@ -4,8 +4,15 @@ import SongsList from '../components/SongsList';
 import Player from '../components/Player';
 import Header from '../components/Header';
 import { connect } from 'react-redux';
-import { fetchPopular, fetchSearchResults, deleteSearch, newSelect } from '../actions';
+import {
+  fetchPopular,
+  fetchSearchResults,
+  deleteSearch,
+  newSelect,
+  defineTrackList,
+} from '../actions';
 import styled from 'styled-components';
+import TrackList from '../components/TrackList';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -25,12 +32,13 @@ class Home extends React.Component {
   fetchState = () => {
     this.props.fetchPopular().then(() => {
       const { popular } = this.props;
-      return this.props.newSelect({ ...popular });
+      this.props.newSelect({ ...popular });
+      this.props.defineTrackList({ ...popular });
     });
   };
 
   renderHeader = () => {
-    const { search, popular, selected } = this.props;
+    const { search, popular, selected, showTrackList } = this.props;
     if (Object.entries(selected).length === 0) return <div>Loading...</div>;
     let songs;
     // if (Object.entries(search).length === 0) {
@@ -41,6 +49,7 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <Header object={selected} />
+        {showTrackList ? <TrackList /> : null}
         <Player />
       </React.Fragment>
     );
@@ -61,6 +70,7 @@ const mapStateToProps = (state) => {
     popular: state.songs.popular,
     search: state.songs.search,
     selected: state.selected,
+    showTrackList: state.showTrackList.show,
   };
 };
 
@@ -69,4 +79,5 @@ export default connect(mapStateToProps, {
   fetchSearchResults,
   deleteSearch,
   newSelect,
+  defineTrackList,
 })(Home);

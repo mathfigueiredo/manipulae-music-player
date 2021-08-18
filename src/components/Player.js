@@ -3,11 +3,17 @@ import PlayButton from './icons/PlayButton';
 import PauseButton from './icons/PauseButton';
 import BackwardButton from './icons/BackwardButton';
 import ForwardButton from './icons/ForwardButton';
-import TrackList from './icons/TrackList';
+import TrackListButton from './icons/TrackListButton';
 import FavButton from './icons/FavButton';
+import { showTrackList } from '../actions';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 class Player extends React.Component {
+  toggleTrackList = (boolean) => {
+    const { showTrackList } = this.props;
+    showTrackList(boolean);
+  };
   render() {
     return (
       <StyledPlayer>
@@ -23,7 +29,9 @@ class Player extends React.Component {
           <ForwardButton />
         </div>
         <div className="tracklist-and-like">
-          <TrackList />
+          <div onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}>
+            <TrackListButton />
+          </div>
           <FavButton />
         </div>
       </StyledPlayer>
@@ -41,6 +49,7 @@ const StyledPlayer = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: green;
+  z-index: 2;
 
   .time-control {
     flex-grow: 3;
@@ -78,4 +87,10 @@ const StyledPlayer = styled.div`
   }
 `;
 
-export default Player;
+const mapStateToProps = (state) => {
+  return {
+    trackListIsOnScreen: state.showTrackList.show,
+  };
+};
+
+export default connect(mapStateToProps, { showTrackList })(Player);

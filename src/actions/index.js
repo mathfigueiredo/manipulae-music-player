@@ -24,3 +24,16 @@ export const deleteSearch = () => {
 export const newSelect = (properties) => {
   return { type: 'NEW_SELECT', payload: properties };
 };
+
+export const defineTrackList = (properties) => {
+  let trackList;
+  if (properties.type === 'playlist') {
+    trackList = properties.tracks.data;
+  }
+  return { type: 'DEFINE_TRACKLIST', payload: trackList };
+};
+
+export const showTrackList = (boolean) => {
+  console.log(boolean);
+  return { type: 'SHOW_TRACKLIST', payload: boolean };
+};

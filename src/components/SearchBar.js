@@ -38,6 +38,10 @@ const StyledForm = styled.form`
       outline: none;
       width: 30%;
     }
+
+    &:focus + .magnifier {
+      opacity: 0;
+    }
   }
 `;
 
