@@ -4,12 +4,13 @@ import { lightGrey } from '../styles';
 import Icon from './Icon';
 import Deezer from './icons/Deezer';
 import { connect } from 'react-redux';
-import { addToFavorites } from '../actions';
+import { addToFavorites, removeFromFavorites } from '../actions';
 
 class SongCard extends React.Component {
-  addFav = () => {
-    const { song, favorites, addToFavorites } = this.props;
+  clickFav = () => {
+    const { song, favorites, addToFavorites, removeFromFavorites } = this.props;
     if (favorites.indexOf(song) === -1) addToFavorites(song);
+    else removeFromFavorites(song);
   };
 
   render() {
@@ -29,7 +30,7 @@ class SongCard extends React.Component {
               alt="song logo"
             />
           </div>
-          <div className="icon" onClick={this.addFav}>
+          <div className="icon" onClick={this.clickFav}>
             <Icon icon="fav" fill={lightGrey} song={this.props.song} heart={heart} />
           </div>
           <div className="details">
@@ -91,4 +92,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addToFavorites })(SongCard);
+export default connect(mapStateToProps, { addToFavorites, removeFromFavorites })(SongCard);

@@ -40,3 +40,7 @@ export const showTrackList = (boolean) => {
 export const addToFavorites = (song) => {
   return { type: 'ADD_FAVORITE', payload: song };
 };
+
+export const removeFromFavorites = (song) => {
+  return { type: 'REMOVE_FAVORITE', payload: song };
+};
