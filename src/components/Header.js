@@ -52,6 +52,9 @@ const StyledPlaylistHeader = styled.div`
   justify-content: center;
   color: #ccc;
   font-family: sans-serif;
+  img {
+    max-height: 60vh;
+  }
 
   .details {
     margin-left: 22rem;

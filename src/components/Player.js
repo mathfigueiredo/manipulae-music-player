@@ -3,6 +3,8 @@ import PlayButton from './icons/PlayButton';
 import PauseButton from './icons/PauseButton';
 import BackwardButton from './icons/BackwardButton';
 import ForwardButton from './icons/ForwardButton';
+import TrackList from './icons/TrackList';
+import FavButton from './icons/FavButton';
 import styled from 'styled-components';
 
 class Player extends React.Component {
@@ -17,8 +19,12 @@ class Player extends React.Component {
         <div className="play-control">
           <BackwardButton />
           <PlayButton />
-          <PauseButton />
+          {/* <PauseButton /> */}
           <ForwardButton />
+        </div>
+        <div className="tracklist-and-like">
+          <TrackList />
+          <FavButton />
         </div>
       </StyledPlayer>
     );
@@ -26,35 +32,49 @@ class Player extends React.Component {
 }
 
 const StyledPlayer = styled.div`
-  min-height: 20vh;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: space-between;
+  background-color: green;
 
   .time-control {
+    flex-grow: 3;
+    order: 1;
     width: 50%;
     display: flex;
+    text-align: center;
     input {
       width: 100%;
-      padding: 1rem 2rem;
       cursor: pointer;
     }
     p {
-      padding: 1rem;
+      padding: 0.3rem;
     }
   }
 
   .play-control {
-    width: 30%;
+    flex-grow: 1;
+    width: 25%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 1rem;
 
     svg {
       cursor: pointer;
     }
+  }
+
+  .tracklist-and-like {
+    width: 25%;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    order: 2;
+    display: flex;
   }
 `;
 

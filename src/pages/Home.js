@@ -1,9 +1,11 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 import SongsList from '../components/SongsList';
+import Player from '../components/Player';
 import Header from '../components/Header';
 import { connect } from 'react-redux';
 import { fetchPopular, fetchSearchResults, deleteSearch, newSelect } from '../actions';
+import styled from 'styled-components';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -36,7 +38,12 @@ class Home extends React.Component {
     // } else {
     //   songs = search;
     // }
-    return <Header object={selected} />;
+    return (
+      <React.Fragment>
+        <Header object={selected} />
+        <Player />
+      </React.Fragment>
+    );
   };
 
   render() {
