@@ -30,7 +30,7 @@ class TrackList extends React.Component {
 const StyledDiv = styled(motion.div)`
   position: absolute;
   top: 0;
-  height: 100vh;
+  height: calc(100vh - 3.5rem);
   width: 100%;
   z-index: 1;
   background-color: black;

@@ -37,7 +37,7 @@ const StyledPlayer = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0;
-  min-height: 10vh;
+  height: 3.5rem;
   display: flex;
   /* flex-direction: column; */
   align-items: center;

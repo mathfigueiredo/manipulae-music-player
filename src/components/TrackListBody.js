@@ -7,7 +7,7 @@ class TrackListBody extends React.Component {
   render() {
     const songs = this.props.trackList.data;
     return (
-      <StyledTrackListBody>
+      <StyledTrackListBody className="BODY">
         <SongsList songs={songs} />
       </StyledTrackListBody>
     );
@@ -17,6 +17,10 @@ class TrackListBody extends React.Component {
 const StyledTrackListBody = styled.div`
   margin-top: 1rem;
   flex-basis: 70%;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const mapStateToProps = (state) => {
