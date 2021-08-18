@@ -1,12 +1,12 @@
 import React from 'react';
-import SongHeader from './SongHeader';
+import Header from './Header';
 import Player from './Player';
 
 class SongDetails extends React.Component {
   render() {
     return (
       <div>
-        <SongHeader />
+        <Header />
         <Player />
       </div>
     );

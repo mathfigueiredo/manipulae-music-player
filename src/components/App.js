@@ -8,8 +8,8 @@ class App extends React.Component {
     return (
       <div>
         <GlobalStyle />
-        {/* <Home /> */}
-        <SongDetails />
+        <Home />
+        {/* <SongDetails /> */}
       </div>
     );
   }

@@ -1,12 +1,14 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 import SongsList from '../components/SongsList';
+import Header from '../components/Header';
 import { connect } from 'react-redux';
-import { fetchPopular, fetchSearchResults, deleteSearch } from '../actions';
+import { fetchPopular, fetchSearchResults, deleteSearch, newSelect } from '../actions';
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.fetchPopular();
+    // this.props.fetchPopular();
+    this.fetchState();
   }
 
   onSearchChange = (e) => {
@@ -18,19 +20,30 @@ class Home extends React.Component {
     }
   };
 
-  renderSongs = () => {
-    const { search, popular } = this.props;
-    if (Object.entries(popular).length === 0) return <div>Loading...</div>;
+  fetchState = () => {
+    this.props.fetchPopular().then(() => {
+      const { popular } = this.props;
+      return this.props.newSelect({ ...popular });
+    });
+  };
+
+  renderHeader = () => {
+    const { search, popular, selected } = this.props;
+    if (Object.entries(selected).length === 0) return <div>Loading...</div>;
     let songs;
-    songs = Object.entries(search).length === 0 ? popular.tracks.data : search;
-    return <SongsList songs={songs} />;
+    // if (Object.entries(search).length === 0) {
+    //   songs = popular.tracks.data;
+    // } else {
+    //   songs = search;
+    // }
+    return <Header object={selected} />;
   };
 
   render() {
     return (
       <div>
         <SearchBar onSearchChange={this.onSearchChange} />
-        {this.renderSongs()}
+        {this.renderHeader()}
       </div>
     );
   }
@@ -40,7 +53,13 @@ const mapStateToProps = (state) => {
   return {
     popular: state.songs.popular,
     search: state.songs.search,
+    selected: state.selected,
   };
 };
 
-export default connect(mapStateToProps, { fetchPopular, fetchSearchResults, deleteSearch })(Home);
+export default connect(mapStateToProps, {
+  fetchPopular,
+  fetchSearchResults,
+  deleteSearch,
+  newSelect,
+})(Home);

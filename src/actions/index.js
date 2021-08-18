@@ -20,3 +20,7 @@ export const fetchSearchResults = (e) => {
 export const deleteSearch = () => {
   return { type: 'DELETE_SEARCH' };
 };
+
+export const newSelect = (properties) => {
+  return { type: 'NEW_SELECT', payload: properties };
+};
