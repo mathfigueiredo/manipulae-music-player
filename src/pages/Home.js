@@ -40,7 +40,7 @@ class Home extends React.Component {
   };
 
   renderHeader = () => {
-    const { search, popular, selected, showTrackList } = this.props;
+    const { search, popular, selected, showTrackList, trackList } = this.props;
     if (Object.entries(selected).length === 0) return <div>Loading...</div>;
     let songs;
     // if (Object.entries(search).length === 0) {
@@ -53,7 +53,7 @@ class Home extends React.Component {
         <Header object={selected} />
         {/* {showTrackList ? <TrackList /> : null} */}
 
-        <TrackList />
+        <TrackList object={selected} trackList={trackList} />
 
         <Player />
       </React.Fragment>
@@ -82,6 +82,7 @@ const mapStateToProps = (state) => {
     search: state.songs.search,
     selected: state.selected,
     showTrackList: state.showTrackList.show,
+    trackList: state.trackList,
   };
 };
 

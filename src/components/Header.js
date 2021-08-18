@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { lightGrey } from '../styles';
 
 class Header extends React.Component {
   render() {
@@ -50,7 +51,7 @@ const StyledPlaylistHeader = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #ccc;
+  color: ${lightGrey};
   font-family: sans-serif;
   img {
     max-height: 60vh;

@@ -1,7 +1,7 @@
 const defineTrackListReducer = (state = {}, action) => {
   switch (action.type) {
     case 'DEFINE_TRACKLIST':
-      return { ...state, ...action.payload };
+      return { ...state, data: action.payload };
     default:
       return state;
   }
