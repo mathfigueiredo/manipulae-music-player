@@ -1,10 +1,5 @@
 import React from 'react';
-import PlayButton from './icons/PlayButton';
-import PauseButton from './icons/PauseButton';
-import BackwardButton from './icons/BackwardButton';
-import ForwardButton from './icons/ForwardButton';
-import TrackListButton from './icons/TrackListButton';
-import FavButton from './icons/FavButton';
+import Icon from './Icon';
 import { showTrackList } from '../actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -23,16 +18,15 @@ class Player extends React.Component {
           <p>End Time</p>
         </div>
         <div className="play-control">
-          <BackwardButton />
-          <PlayButton />
-          {/* <PauseButton /> */}
-          <ForwardButton />
+          <Icon icon="backward" />
+          <Icon icon="play" />
+          <Icon icon="forward" />
         </div>
         <div className="tracklist-and-like">
           <div onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}>
-            <TrackListButton />
+            <Icon icon="tracklist" />
           </div>
-          <FavButton />
+          <Icon icon="fav" />
         </div>
       </StyledPlayer>
     );

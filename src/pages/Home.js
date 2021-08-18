@@ -13,6 +13,8 @@ import {
 } from '../actions';
 import styled from 'styled-components';
 import TrackList from '../components/TrackList';
+import { motion } from 'framer-motion';
+import { slideUpAnimation } from '../animations';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -49,7 +51,10 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <Header object={selected} />
-        {showTrackList ? <TrackList /> : null}
+        {/* {showTrackList ? <TrackList /> : null} */}
+
+        <TrackList />
+
         <Player />
       </React.Fragment>
     );
@@ -57,13 +62,19 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <StyledHomeDiv>
         <SearchBar onSearchChange={this.onSearchChange} />
         {this.renderHeader()}
-      </div>
+      </StyledHomeDiv>
     );
   }
 }
+
+const StyledHomeDiv = styled.div`
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+`;
 
 const mapStateToProps = (state) => {
   return {

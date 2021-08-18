@@ -1,13 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 
 class TrackList extends React.Component {
   render() {
-    return <StyledDiv>TrackList</StyledDiv>;
+    const { showTrackList } = this.props;
+    return (
+      <AnimatePresence>
+        {showTrackList ? (
+          <StyledDiv
+            key="tracklist"
+            initial={{ y: '100%' }}
+            animate={{ y: '0%' }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', duration: 1 }}>
+            TrackList
+          </StyledDiv>
+        ) : null}
+      </AnimatePresence>
+    );
   }
 }
 
-const StyledDiv = styled.div`
+const StyledDiv = styled(motion.div)`
   position: absolute;
   top: 0;
   height: 100vh;
@@ -16,4 +32,10 @@ const StyledDiv = styled.div`
   background-color: black;
 `;
 
-export default TrackList;
+const mapStateToProps = (state) => {
+  return {
+    showTrackList: state.showTrackList.show,
+  };
+};
+
+export default connect(mapStateToProps)(TrackList);
