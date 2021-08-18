@@ -3,11 +3,21 @@ import styled from 'styled-components';
 import { lightGrey } from '../styles';
 import Icon from './Icon';
 import Deezer from './icons/Deezer';
+import { connect } from 'react-redux';
+import { addToFavorites } from '../actions';
 
 class SongCard extends React.Component {
+  addFav = () => {
+    const { song, favorites, addToFavorites } = this.props;
+    if (favorites.indexOf(song) === -1) addToFavorites(song);
+  };
+
   render() {
-    //https://e-cdns-images.dzcdn.net/images/cover/198af52fb6801a5881180232cb649f61/264x264-000000-80-0-0.jpg
-    const { id, title, duration, preview, artist, album, md5_image } = this.props.song;
+    const { song } = this.props;
+    const { id, title, duration, preview, artist, album, md5_image } = song;
+    const { favorites } = this.props;
+    let heart;
+    heart = favorites.indexOf(song) === -1 ? 'empty' : 'full';
     const minutes = Math.floor(duration / 60);
     const seconds = duration - minutes * 60;
     return (
@@ -19,8 +29,8 @@ class SongCard extends React.Component {
               alt="song logo"
             />
           </div>
-          <div className="icon">
-            <Icon icon="fav" fill={lightGrey} />
+          <div className="icon" onClick={this.addFav}>
+            <Icon icon="fav" fill={lightGrey} song={this.props.song} heart={heart} />
           </div>
           <div className="details">
             <div>
@@ -75,4 +85,10 @@ const StyledSongCard = styled.div`
   }
 `;
 
-export default SongCard;
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favorites,
+  };
+};
+
+export default connect(mapStateToProps, { addToFavorites })(SongCard);

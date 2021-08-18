@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
   popular: {},
   search: {},
-  favorites: {},
 };
 
 const fetchReducer = (state = INITIAL_STATE, action) => {

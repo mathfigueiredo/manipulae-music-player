@@ -34,6 +34,9 @@ export const defineTrackList = (properties) => {
 };
 
 export const showTrackList = (boolean) => {
-  console.log(boolean);
   return { type: 'SHOW_TRACKLIST', payload: boolean };
+};
+
+export const addToFavorites = (song) => {
+  return { type: 'ADD_FAVORITE', payload: song };
 };
