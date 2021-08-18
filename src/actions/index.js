@@ -12,7 +12,6 @@ export const fetchPopular = () => {
 export const fetchSearchResults = (e) => {
   return async (dispatch) => {
     const response = await deezer.get('/search', { params: { q: e.target.value } });
-    console.log(response.data);
 
     dispatch({ type: 'FETCH_SEARCH', payload: response.data.data });
   };
