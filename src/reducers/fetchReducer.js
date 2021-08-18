@@ -1,14 +1,12 @@
 const INITIAL_STATE = {
-  popular: {},
-  search: {},
+  showList: {},
   favorites: {},
 };
 
 const fetchReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'FETCH_POPULAR':
-      console.log(action.payload);
-      return { ...state, popular: action.payload };
+      return { ...state, showList: action.payload };
     default:
       return state;
   }
