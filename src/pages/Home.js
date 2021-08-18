@@ -18,11 +18,19 @@ class Home extends React.Component {
     }
   };
 
+  renderSongs = () => {
+    const { search, popular } = this.props;
+    if (Object.entries(popular).length === 0) return <div>Loading...</div>;
+    let songs;
+    songs = Object.entries(search).length === 0 ? popular.tracks.data : search;
+    return <SongsList songs={songs} />;
+  };
+
   render() {
     return (
       <div>
         <SearchBar onSearchChange={this.onSearchChange} />
-        <SongsList />
+        {this.renderSongs()}
       </div>
     );
   }
@@ -30,7 +38,8 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    songs: state.songs,
+    popular: state.songs.popular,
+    search: state.songs.search,
   };
 };
 
