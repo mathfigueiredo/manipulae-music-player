@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
-import deezer from '../api/deezer';
+import SongsList from '../components/SongsList';
 import { connect } from 'react-redux';
 import { fetchPopular, fetchSearchResults, deleteSearch } from '../actions';
 
@@ -22,6 +22,7 @@ class Home extends React.Component {
     return (
       <div>
         <SearchBar onSearchChange={this.onSearchChange} />
+        <SongsList />
       </div>
     );
   }
