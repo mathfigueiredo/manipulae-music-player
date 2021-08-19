@@ -31,7 +31,7 @@ const StyledDiv = styled(motion.div)`
   top: 0;
   height: calc(100vh - 3.5rem);
   width: 100%;
-  z-index: 1;
+  z-index: 12;
   background-color: black;
 
   display: flex;
@@ -40,7 +40,7 @@ const StyledDiv = styled(motion.div)`
 
 const mapStateToProps = (state) => {
   return {
-    showTrackList: state.showTrackList.show,
+    showTrackList: state.showTrackList,
   };
 };
 

@@ -9,9 +9,13 @@ import changeCurrentSongReducer from './changeCurrentSongReducer';
 import playPauseReducer from './playPauseReducer';
 import updateTimeReducer from './updateTimeReducer';
 import changeColorReducer from './changeColorReducer';
+import toggleSearchWindowReducer from './toggleSearchWindowReducer';
+import changeSearchOptionReducer from './changeSearchOptionReducer';
+import changeAnimationDivReducer from './changeAnimationDivReducer';
 
 export default combineReducers({
   form: reducer,
+  searchOption: changeSearchOptionReducer,
   currentSong: changeCurrentSongReducer,
   playPause: playPauseReducer,
   currentTime: updateTimeReducer,
@@ -21,4 +25,6 @@ export default combineReducers({
   trackList: defineTrackListReducer,
   showTrackList: showTrackListReducer,
   color: changeColorReducer,
+  showSearchWindow: toggleSearchWindowReducer,
+  animationDivLeft: changeAnimationDivReducer,
 });

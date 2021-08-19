@@ -176,7 +176,7 @@ const StyledPlayer = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: black;
-  z-index: 2;
+  z-index: 13;
   p.song-title {
     color: white;
     position: absolute;
@@ -266,7 +266,7 @@ const mapStateToProps = (state) => {
     currentTime: state.currentTime,
     favorites: state.favorites,
     trackList: state.trackList,
-    trackListIsOnScreen: state.showTrackList.show,
+    trackListIsOnScreen: state.showTrackList,
     color: state.color,
   };
 };

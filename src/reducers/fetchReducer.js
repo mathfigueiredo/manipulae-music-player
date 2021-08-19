@@ -8,7 +8,13 @@ const fetchReducer = (state = INITIAL_STATE, action) => {
     case 'FETCH_POPULAR':
       return { ...state, popular: action.payload };
     case 'FETCH_SEARCH':
-      return { ...state, search: action.payload };
+      return { ...state, search: { ...state.search, all: action.payload } };
+    case 'FETCH_SEARCH_TRACKS':
+      return { ...state, search: { ...state.search, tracks: action.payload } };
+    case 'FETCH_SEARCH_ARTISTS':
+      return { ...state, search: { ...state.search, artists: action.payload } };
+    case 'FETCH_SEARCH_ALBUMS':
+      return { ...state, search: { ...state.search, albums: action.payload } };
     case 'DELETE_SEARCH':
       return { ...state, search: {} };
     default:

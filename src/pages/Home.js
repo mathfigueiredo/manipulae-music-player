@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import TrackList from '../components/TrackList';
 import { motion } from 'framer-motion';
 import { slideUpAnimation } from '../animations';
+import SearchWindow from '../components/SearchWindow';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -64,6 +65,7 @@ class Home extends React.Component {
     return (
       <StyledHomeDiv>
         <SearchBar onSearchChange={this.onSearchChange} />
+        <SearchWindow />
         {this.renderHeader()}
       </StyledHomeDiv>
     );

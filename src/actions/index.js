@@ -17,6 +17,30 @@ export const fetchSearchResults = (e) => {
   };
 };
 
+export const fetchSearchTracks = (e) => {
+  return async (dispatch) => {
+    const response = await deezer.get('/search', { params: { q: `track:"${e.target.value}"` } });
+
+    dispatch({ type: 'FETCH_SEARCH_TRACKS', payload: response.data.data });
+  };
+};
+
+export const fetchSearchArtists = (e) => {
+  return async (dispatch) => {
+    const response = await deezer.get('/search', { params: { q: `artist:"${e.target.value}"` } });
+
+    dispatch({ type: 'FETCH_SEARCH_ARTISTS', payload: response.data.data });
+  };
+};
+
+export const fetchSearchAlbums = (e) => {
+  return async (dispatch) => {
+    const response = await deezer.get('/search', { params: { q: `album:"${e.target.value}"` } });
+
+    dispatch({ type: 'FETCH_SEARCH_ALBUMS', payload: response.data.data });
+  };
+};
+
 export const deleteSearch = () => {
   return { type: 'DELETE_SEARCH' };
 };
@@ -27,6 +51,9 @@ export const newSelect = (properties) => {
 
 export const defineTrackList = (properties) => {
   let trackList;
+  if (!properties.type) {
+    trackList = properties;
+  }
   if (properties.type === 'playlist') {
     trackList = properties.tracks.data;
   }
@@ -76,4 +103,16 @@ export const generateRGB = () => {
 export const changeColor = () => {
   const color = generateRGB();
   return { type: 'CHANGE_COLOR', payload: color };
+};
+
+export const toggleSearchWingow = (boolean) => {
+  return { type: 'TOGGLE_SEARCH', payload: boolean };
+};
+
+export const changeSearchOption = (searchOption) => {
+  return { type: 'CHANGE_SEARCH', payload: searchOption };
+};
+
+export const changeAnimationDivLeft = (value) => {
+  return { type: 'CHANGE_LEFT', payload: value };
 };
