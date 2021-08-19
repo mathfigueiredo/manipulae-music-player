@@ -1,6 +1,14 @@
 import React, { createRef } from 'react';
 import Icon from './Icon';
-import { showTrackList, nowPlaying, nowPaused, changeCurrentSong, updateTime } from '../actions';
+import {
+  showTrackList,
+  nowPlaying,
+  nowPaused,
+  changeCurrentSong,
+  updateTime,
+  addToFavorites,
+  removeFromFavorites,
+} from '../actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -68,6 +76,12 @@ class Player extends React.Component {
     showTrackList(boolean);
   };
 
+  clickFav = () => {
+    const { currentSong, favorites, addToFavorites, removeFromFavorites } = this.props;
+    if (favorites.indexOf(currentSong) === -1) addToFavorites(currentSong);
+    else removeFromFavorites(currentSong);
+  };
+
   componentDidUpdate() {
     const { playPause, currentSong } = this.props;
     if (playPause === 'playing' && currentSong) this.audioRef.current.play();
@@ -75,9 +89,13 @@ class Player extends React.Component {
   }
 
   render() {
-    const { currentSong, playPause, currentTime } = this.props;
+    const { currentSong, playPause, currentTime, favorites } = this.props;
     const preview = currentSong ? currentSong.preview : null;
     const currentPlayPause = playPause === 'playing' ? 'pause' : 'play';
+    let heart;
+    if (currentSong && favorites.indexOf(currentSong) !== -1) heart = 'full';
+    else heart = 'empty';
+
     let endTime;
     let minutes;
     let seconds;
@@ -111,21 +129,30 @@ class Player extends React.Component {
           <p>{endTime}</p>
         </div>
         <div className="play-control">
-          <div onClick={this.onBackwardClick}>
-            <Icon icon="backward" />
+          <div onClick={this.onBackwardClick} style={{ cursor: 'pointer' }}>
+            <Icon icon="backward" fill="transparent" clipPath="backward" />
           </div>
-          <div onClick={this.onPlayPauseClick}>
-            <Icon icon="playpause" current={currentPlayPause} />
+          <div onClick={this.onPlayPauseClick} style={{ cursor: 'pointer' }}>
+            <Icon
+              icon="playpause"
+              current={currentPlayPause}
+              fill="transparent"
+              clipPath={currentPlayPause}
+            />
           </div>
-          <div onClick={this.onForwardClick}>
-            <Icon icon="forward" />
+          <div onClick={this.onForwardClick} style={{ cursor: 'pointer' }}>
+            <Icon icon="forward" fill="transparent" clipPath="forward" />
           </div>
         </div>
         <div className="tracklist-and-like">
-          <div onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}>
-            <Icon icon="tracklist" />
+          <div
+            onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}
+            style={{ cursor: 'pointer' }}>
+            <Icon icon="tracklist" fill="transparent" clipPath="tracklist" />
           </div>
-          <Icon icon="fav" />
+          <div onClick={this.clickFav} style={{ cursor: 'pointer' }}>
+            <Icon icon="fav" heart={heart} fill="transparent" clipPath={`heart${heart}`} />
+          </div>
         </div>
         <audio onTimeUpdate={this.onTimeUpdateHandler} ref={this.audioRef} src={preview}></audio>
       </StyledPlayer>
@@ -219,6 +246,7 @@ const mapStateToProps = (state) => {
     currentSong: state.currentSong,
     playPause: state.playPause,
     currentTime: state.currentTime,
+    favorites: state.favorites,
     trackList: state.trackList,
     trackListIsOnScreen: state.showTrackList.show,
   };
@@ -230,4 +258,6 @@ export default connect(mapStateToProps, {
   nowPaused,
   changeCurrentSong,
   updateTime,
+  addToFavorites,
+  removeFromFavorites,
 })(Player);

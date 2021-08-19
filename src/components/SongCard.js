@@ -43,8 +43,19 @@ class SongCard extends React.Component {
               alt="song logo"
             />
           </div>
-          <div className="icon" onClick={this.clickFav}>
-            <Icon icon="fav" fill={lightGrey} song={this.props.song} heart={heart} />
+          <div
+            data-type="fav"
+            className="icon"
+            onClick={this.clickFav}
+            style={{ cursor: 'pointer' }}>
+            <Icon
+              icon="fav"
+              // fill={lightGrey}
+              song={this.props.song}
+              heart={heart}
+              fill="transparent"
+              clipPath={`heart${heart}`}
+            />
           </div>
           <div className="details">
             <div>
