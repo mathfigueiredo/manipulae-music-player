@@ -1,15 +1,46 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import Icon from './Icon';
-import { showTrackList } from '../actions';
+import { showTrackList, nowPlaying, nowPaused } from '../actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 class Player extends React.Component {
+  constructor() {
+    super();
+
+    this.audioRef = createRef();
+  }
+
+  onPlayPauseClick = (e) => {
+    if (e.target.dataset.playpause === 'play') this.onPlayClick();
+    if (e.target.dataset.playpause === 'pause') this.onPauseClick();
+  };
+
+  onPlayClick = () => {
+    const { nowPlaying, playPause, currentSong } = this.props;
+    if (playPause === 'paused' && currentSong) nowPlaying();
+  };
+
+  onPauseClick = () => {
+    const { nowPaused, playPause } = this.props;
+    if (playPause === 'playing') nowPaused();
+  };
+
   toggleTrackList = (boolean) => {
     const { showTrackList } = this.props;
     showTrackList(boolean);
   };
+
+  componentDidUpdate() {
+    const { playPause, currentSong } = this.props;
+    if (playPause === 'playing' && currentSong) this.audioRef.current.play();
+    if (playPause === 'paused' || !currentSong) this.audioRef.current.pause();
+  }
+
   render() {
+    const { currentSong, playPause } = this.props;
+    const preview = currentSong ? currentSong.preview : null;
+    const currentPlayPause = playPause === 'playing' ? 'pause' : 'play';
     return (
       <StyledPlayer>
         <div className="time-control">
@@ -19,7 +50,9 @@ class Player extends React.Component {
         </div>
         <div className="play-control">
           <Icon icon="backward" />
-          <Icon icon="play" />
+          <div onClick={this.onPlayPauseClick}>
+            <Icon icon="playpause" current={currentPlayPause} />
+          </div>
           <Icon icon="forward" />
         </div>
         <div className="tracklist-and-like">
@@ -28,6 +61,7 @@ class Player extends React.Component {
           </div>
           <Icon icon="fav" />
         </div>
+        <audio ref={this.audioRef} src={preview}></audio>
       </StyledPlayer>
     );
   }
@@ -83,8 +117,10 @@ const StyledPlayer = styled.div`
 
 const mapStateToProps = (state) => {
   return {
+    currentSong: state.currentSong,
+    playPause: state.playPause,
     trackListIsOnScreen: state.showTrackList.show,
   };
 };
 
-export default connect(mapStateToProps, { showTrackList })(Player);
+export default connect(mapStateToProps, { showTrackList, nowPlaying, nowPaused })(Player);

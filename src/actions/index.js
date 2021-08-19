@@ -44,3 +44,15 @@ export const addToFavorites = (song) => {
 export const removeFromFavorites = (song) => {
   return { type: 'REMOVE_FAVORITE', payload: song };
 };
+
+export const changeCurrentSong = (song) => {
+  return { type: 'CHANGE_CURRENT_SONG', payload: song };
+};
+
+export const nowPlaying = () => {
+  return { type: 'PLAY' };
+};
+
+export const nowPaused = () => {
+  return { type: 'PAUSE' };
+};

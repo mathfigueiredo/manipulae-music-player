@@ -1,28 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
-import { lightGrey } from '../styles';
+import { lightGrey, darkGrey } from '../styles';
 import Icon from './Icon';
 import Deezer from './icons/Deezer';
 import { connect } from 'react-redux';
-import { addToFavorites, removeFromFavorites } from '../actions';
+import { addToFavorites, removeFromFavorites, changeCurrentSong, nowPlaying } from '../actions';
 
 class SongCard extends React.Component {
+  cardClickHandler = (e) => {
+    if (e.target.dataset.type === 'fav') this.clickFav();
+    if (e.target.dataset.type === 'deezer') this.clickDeezer();
+    if (!e.target.dataset.type) this.changeCurrentSong();
+  };
+
   clickFav = () => {
     const { song, favorites, addToFavorites, removeFromFavorites } = this.props;
     if (favorites.indexOf(song) === -1) addToFavorites(song);
     else removeFromFavorites(song);
   };
 
+  clickDeezer = () => {};
+
+  changeCurrentSong = () => {
+    const { song, currentSong, changeCurrentSong, nowPlaying } = this.props;
+    if (currentSong !== song) changeCurrentSong(song);
+    nowPlaying();
+  };
+
   render() {
     const { song } = this.props;
-    const { id, title, duration, preview, artist, album, md5_image } = song;
+    const { id, title, duration, preview, artist, album, md5_image, link } = song;
     const { favorites } = this.props;
     let heart;
     heart = favorites.indexOf(song) === -1 ? 'empty' : 'full';
     const minutes = Math.floor(duration / 60);
     const seconds = duration - minutes * 60;
     return (
-      <StyledSongCard>
+      <StyledSongCard onClick={this.cardClickHandler}>
         <div className="left-div">
           <div className="img-div">
             <img
@@ -42,7 +56,9 @@ class SongCard extends React.Component {
         </div>
         <div className="right-div">
           <div className="deezer">
-            <Deezer />
+            <a href={link} target="blank">
+              <Deezer />
+            </a>
           </div>
         </div>
       </StyledSongCard>
@@ -51,6 +67,7 @@ class SongCard extends React.Component {
 }
 
 const StyledSongCard = styled.div`
+  cursor: pointer;
   border-bottom: 1px solid white;
   color: ${lightGrey};
   width: 100%;
@@ -59,6 +76,10 @@ const StyledSongCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &:hover {
+    background-color: ${darkGrey};
+  }
 
   .left-div {
     display: flex;
@@ -88,8 +109,14 @@ const StyledSongCard = styled.div`
 
 const mapStateToProps = (state) => {
   return {
+    currentSong: state.currentSong,
     favorites: state.favorites,
   };
 };
 
-export default connect(mapStateToProps, { addToFavorites, removeFromFavorites })(SongCard);
+export default connect(mapStateToProps, {
+  addToFavorites,
+  removeFromFavorites,
+  changeCurrentSong,
+  nowPlaying,
+})(SongCard);
