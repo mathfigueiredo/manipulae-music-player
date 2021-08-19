@@ -17,7 +17,7 @@ class SearchBody extends React.Component {
     if (stateSearchOption === 'tracks') list = songs.search.tracks;
     if (stateSearchOption === 'artists') list = songs.search.artists;
     if (stateSearchOption === 'albums') list = songs.search.albums;
-    return <SongsList songs={list} />;
+    return <SongsList songs={list} from="search" />;
   };
 
   render() {

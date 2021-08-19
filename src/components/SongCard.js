@@ -10,6 +10,8 @@ import {
   changeCurrentSong,
   nowPlaying,
   changeColor,
+  defineTrackList,
+  newSelect,
 } from '../actions';
 
 class SongCard extends React.Component {
@@ -28,14 +30,33 @@ class SongCard extends React.Component {
   clickDeezer = () => {};
 
   changeCurrentSong = () => {
-    const { song, currentSong, changeCurrentSong, nowPlaying, changeColor } = this.props;
-    if (currentSong !== song) changeCurrentSong(song);
+    const {
+      song,
+      currentSong,
+      changeCurrentSong,
+      nowPlaying,
+      changeColor,
+      trackList,
+      defineTrackList,
+      newSelect,
+      stateSearchOption,
+      songs,
+      from,
+    } = this.props;
+    if (currentSong !== song) {
+      changeCurrentSong(song);
+      newSelect(song);
+    }
+    if (from === 'search' && trackList !== songs.search[stateSearchOption]) {
+      console.log(stateSearchOption);
+      defineTrackList(songs.search[stateSearchOption]);
+    }
     nowPlaying();
     changeColor();
   };
 
   render() {
-    const { song, currentSong, favorites, color } = this.props;
+    const { song, currentSong, favorites, color, from } = this.props;
     const { id, title, duration, preview, artist, album, md5_image, link } = song;
     let heart;
     heart = favorites.indexOf(song) === -1 ? 'empty' : 'full';
@@ -120,7 +141,10 @@ const StyledSongCard = styled.div`
 
 const mapStateToProps = (state) => {
   return {
+    songs: state.songs,
     currentSong: state.currentSong,
+    stateSearchOption: state.searchOption,
+    trackList: state.trackList,
     favorites: state.favorites,
     color: state.color,
   };
@@ -132,4 +156,6 @@ export default connect(mapStateToProps, {
   changeCurrentSong,
   nowPlaying,
   changeColor,
+  defineTrackList,
+  newSelect,
 })(SongCard);

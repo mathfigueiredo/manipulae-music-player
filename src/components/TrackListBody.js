@@ -8,7 +8,7 @@ class TrackListBody extends React.Component {
     const songs = this.props.trackList.data;
     return (
       <StyledTrackListBody className="BODY">
-        <SongsList songs={songs} />
+        <SongsList songs={songs} from="tracklist" />
       </StyledTrackListBody>
     );
   }
