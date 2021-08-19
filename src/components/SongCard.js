@@ -28,9 +28,8 @@ class SongCard extends React.Component {
   };
 
   render() {
-    const { song } = this.props;
+    const { song, currentSong, favorites } = this.props;
     const { id, title, duration, preview, artist, album, md5_image, link } = song;
-    const { favorites } = this.props;
     let heart;
     heart = favorites.indexOf(song) === -1 ? 'empty' : 'full';
     const minutes = Math.floor(duration / 60);

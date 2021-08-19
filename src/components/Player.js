@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
 import Icon from './Icon';
-import { showTrackList, nowPlaying, nowPaused } from '../actions';
+import { showTrackList, nowPlaying, nowPaused, changeCurrentSong } from '../actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -10,6 +10,26 @@ class Player extends React.Component {
 
     this.audioRef = createRef();
   }
+
+  onBackwardClick = () => {
+    const {
+      trackList: { data },
+      currentSong,
+      changeCurrentSong,
+    } = this.props;
+    const previousSongIndex = data.indexOf(currentSong) - 1;
+    if (previousSongIndex >= 0) changeCurrentSong(data[previousSongIndex]);
+  };
+
+  onForwardClick = () => {
+    const {
+      trackList: { data },
+      currentSong,
+      changeCurrentSong,
+    } = this.props;
+    const nextSongIndex = data.indexOf(currentSong) + 1;
+    if (nextSongIndex < data.length) changeCurrentSong(data[nextSongIndex]);
+  };
 
   onPlayPauseClick = (e) => {
     if (e.target.dataset.playpause === 'play') this.onPlayClick();
@@ -49,11 +69,15 @@ class Player extends React.Component {
           <p>End Time</p>
         </div>
         <div className="play-control">
-          <Icon icon="backward" />
+          <div onClick={this.onBackwardClick}>
+            <Icon icon="backward" />
+          </div>
           <div onClick={this.onPlayPauseClick}>
             <Icon icon="playpause" current={currentPlayPause} />
           </div>
-          <Icon icon="forward" />
+          <div onClick={this.onForwardClick}>
+            <Icon icon="forward" />
+          </div>
         </div>
         <div className="tracklist-and-like">
           <div onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}>
@@ -119,8 +143,14 @@ const mapStateToProps = (state) => {
   return {
     currentSong: state.currentSong,
     playPause: state.playPause,
+    trackList: state.trackList,
     trackListIsOnScreen: state.showTrackList.show,
   };
 };
 
-export default connect(mapStateToProps, { showTrackList, nowPlaying, nowPaused })(Player);
+export default connect(mapStateToProps, {
+  showTrackList,
+  nowPlaying,
+  nowPaused,
+  changeCurrentSong,
+})(Player);
