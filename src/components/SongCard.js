@@ -48,7 +48,6 @@ class SongCard extends React.Component {
       newSelect(song);
     }
     if (from === 'search' && trackList !== songs.search[stateSearchOption]) {
-      console.log(stateSearchOption);
       defineTrackList(songs.search[stateSearchOption]);
     }
     nowPlaying();

@@ -17,7 +17,7 @@ class TrackList extends React.Component {
             animate={{ y: '0%' }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', duration: 1 }}>
-            <TrackListHeader />
+            <TrackListHeader object={this.props.object} />
             <TrackListBody />
           </StyledDiv>
         ) : null}

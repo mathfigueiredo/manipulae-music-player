@@ -9,6 +9,7 @@ import {
   addToFavorites,
   removeFromFavorites,
   changeColor,
+  newSelect,
 } from '../actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -43,10 +44,12 @@ class Player extends React.Component {
       currentSong,
       changeCurrentSong,
       changeColor,
+      newSelect,
     } = this.props;
     const previousSongIndex = data.indexOf(currentSong) - 1;
     if (previousSongIndex >= 0) changeCurrentSong(data[previousSongIndex]);
     changeColor();
+    newSelect(data[previousSongIndex]);
   };
 
   onForwardClick = () => {
@@ -55,10 +58,12 @@ class Player extends React.Component {
       currentSong,
       changeCurrentSong,
       changeColor,
+      newSelect,
     } = this.props;
     const nextSongIndex = data.indexOf(currentSong) + 1;
     if (nextSongIndex < data.length) changeCurrentSong(data[nextSongIndex]);
     changeColor();
+    newSelect(data[nextSongIndex]);
   };
 
   onPlayPauseClick = (e) => {
@@ -280,4 +285,5 @@ export default connect(mapStateToProps, {
   addToFavorites,
   removeFromFavorites,
   changeColor,
+  newSelect,
 })(Player);

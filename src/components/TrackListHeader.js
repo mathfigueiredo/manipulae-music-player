@@ -5,6 +5,7 @@ import { lightGrey } from '../styles';
 
 class TrackListHeader extends React.Component {
   render() {
+    const { color } = this.props;
     if (this.props.selected.type === 'playlist') {
       const { title, duration, nb_tracks, fans, link, picture_medium, tracks } =
         this.props.selected;
@@ -19,8 +20,6 @@ class TrackListHeader extends React.Component {
         seconds = duration - minutes * 60;
       }
 
-      const { color } = this.props;
-
       return (
         <React.Fragment>
           <StyledDiv color={color}>
@@ -34,13 +33,28 @@ class TrackListHeader extends React.Component {
         </React.Fragment>
       );
     }
-    return (
-      <StyledDiv>
-        <div>
-          <img src="" alt="showcase" />
-        </div>
-      </StyledDiv>
-    );
+
+    if (this.props.object.type === 'track') {
+      const { title, duration, id, link, md5_image, artist } = this.props.object;
+      const minutes = Math.floor(duration / 60);
+      const seconds = duration - minutes * 60;
+
+      return (
+        <React.Fragment>
+          <StyledDiv color={color}>
+            <img
+              src={`https://e-cdns-images.dzcdn.net/images/cover/${md5_image}/264x264-000000-80-0-0.jpg`}
+              alt="song cover"
+            />
+            <div className="details">
+              <h1>{title}</h1>
+              <p>{artist.name}</p>
+              <p>{`${minutes}m ${seconds}s`}</p>
+            </div>
+          </StyledDiv>
+        </React.Fragment>
+      );
+    }
   }
 }
 
