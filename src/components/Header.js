@@ -30,6 +30,9 @@ class Header extends React.Component {
               <Deezer />
             </a>
           </div>
+          <div className="favorites-box">
+            <button className="favorites">Favorites</button>
+          </div>
         </StyledHeader>
       );
     }
@@ -51,6 +54,9 @@ class Header extends React.Component {
             <a href={link} target="blank">
               <Deezer />
             </a>
+          </div>
+          <div className="favorites-box">
+            <button className="favorites">Favorites</button>
           </div>
         </StyledHeader>
       );
@@ -96,8 +102,39 @@ const StyledHeader = styled.div`
 
   .deezer {
     position: absolute;
+    left: 2rem;
+    bottom: 3rem;
+  }
+
+  .favorites-box {
+    position: absolute;
+    height: 80px;
+    width: 80px;
     right: 2rem;
     bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .favorites {
+      width: 80px;
+      height: 30px;
+      color: white;
+      font-family: sans-serif;
+      font-weight: bold;
+      background-color: ${(props) => (props.color ? props.color : 'black')};
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 1s;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
   }
 `;
 

@@ -44,15 +44,9 @@ class Home extends React.Component {
     const { search, popular, selected, showTrackList, trackList } = this.props;
     if (Object.entries(selected).length === 0) return <div>Loading...</div>;
     let songs;
-    // if (Object.entries(search).length === 0) {
-    //   songs = popular.tracks.data;
-    // } else {
-    //   songs = search;
-    // }
     return (
       <React.Fragment>
         <Header object={selected} />
-        {/* {showTrackList ? <TrackList /> : null} */}
 
         <TrackList object={selected} trackList={trackList} />
 
