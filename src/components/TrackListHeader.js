@@ -19,9 +19,11 @@ class TrackListHeader extends React.Component {
         seconds = duration - minutes * 60;
       }
 
+      const { color } = this.props;
+
       return (
         <React.Fragment>
-          <StyledDiv>
+          <StyledDiv color={color}>
             <img src={picture_medium} alt="" />
             <div className="details">
               <h1>{title}</h1>
@@ -43,10 +45,14 @@ class TrackListHeader extends React.Component {
 }
 
 const StyledDiv = styled.div`
-  /* height: 30vh; */
   flex-basis: 30%;
   padding: 2rem;
   display: flex;
+  img {
+    &:hover {
+      outline: 1px solid ${(props) => (props.color ? props.color : 'none')};
+    }
+  }
 
   .details {
     font-size: 1.5rem;
@@ -69,6 +75,7 @@ const StyledDiv = styled.div`
 const mapStateToProps = (state) => {
   return {
     selected: state.selected,
+    color: state.color,
   };
 };
 

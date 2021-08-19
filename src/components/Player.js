@@ -67,8 +67,12 @@ class Player extends React.Component {
   };
 
   onPlayClick = () => {
-    const { nowPlaying, playPause, currentSong } = this.props;
+    const { nowPlaying, playPause, currentSong, trackList, changeCurrentSong } = this.props;
     if (playPause === 'paused' && currentSong) nowPlaying();
+    if (!currentSong) {
+      changeCurrentSong(trackList.data[0]);
+      nowPlaying();
+    }
   };
 
   onPauseClick = () => {
@@ -95,6 +99,7 @@ class Player extends React.Component {
 
   render() {
     const { currentSong, playPause, currentTime, favorites, color } = this.props;
+    const songTitle = currentSong ? `${currentSong.title} - ${currentSong.artist.name}` : null;
     const preview = currentSong ? currentSong.preview : null;
     const currentPlayPause = playPause === 'playing' ? 'pause' : 'play';
     let heart;
@@ -119,6 +124,7 @@ class Player extends React.Component {
 
     return (
       <StyledPlayer color={color}>
+        <p className="song-title">{songTitle}</p>
         <div className="time-control">
           <p>{actualTime}</p>
           <div className="bar">
@@ -171,6 +177,15 @@ const StyledPlayer = styled.div`
   justify-content: space-between;
   background-color: black;
   z-index: 2;
+  p.song-title {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 0.5rem;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
 
   .time-control {
     flex-grow: 3;

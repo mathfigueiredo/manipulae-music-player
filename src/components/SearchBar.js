@@ -11,8 +11,9 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { color } = this.props;
     return (
-      <StyledForm>
+      <StyledForm color={color}>
         <Field name="query" component={this.renderInput} onChange={this.props.onSearchChange} />
 
         <Magnifier />
@@ -33,6 +34,7 @@ const StyledForm = styled.form`
     font-size: 1rem;
     letter-spacing: 2px;
     text-align: center;
+    color: ${(props) => props.color || 'black'};
 
     &:focus {
       outline: none;
@@ -49,4 +51,10 @@ const form = reduxForm({
   form: 'searchForm',
 })(SearchBar);
 
-export default connect(null, { fetchSearchResults })(form);
+const mapStateToProps = (state) => {
+  return {
+    color: state.color,
+  };
+};
+
+export default connect(mapStateToProps, { fetchSearchResults })(form);

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lightGrey } from '../styles';
+import { connect } from 'react-redux';
 
 class Header extends React.Component {
   render() {
@@ -17,8 +18,9 @@ class Header extends React.Component {
         seconds = duration - minutes * 60;
       }
 
+      const { color } = this.props;
       return (
-        <StyledPlaylistHeader>
+        <StyledPlaylistHeader color={color}>
           <img src={picture_big} alt="" />
           <p className="details">
             {nb_tracks} Tracks | {hours ? `${hours}h ${minutes}m` : `${minutes}m ${seconds}s`}
@@ -29,9 +31,9 @@ class Header extends React.Component {
     }
     return (
       <StyledSongHeader>
-        <h1>Picture</h1>
-        <h1>Name</h1>
-        <h1>Artist</h1>
+        <h3>
+          We are facing a hard time trying to fetch your data. Please, try again in a few moments.
+        </h3>
       </StyledSongHeader>
     );
   }
@@ -55,6 +57,9 @@ const StyledPlaylistHeader = styled.div`
   font-family: sans-serif;
   img {
     max-height: 60vh;
+    &:hover {
+      outline: 1px solid ${(props) => (props.color ? props.color : 'none')};
+    }
   }
 
   .details {
@@ -64,4 +69,10 @@ const StyledPlaylistHeader = styled.div`
   }
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    color: state.color,
+  };
+};
+
+export default connect(mapStateToProps)(Header);
