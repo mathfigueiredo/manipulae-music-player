@@ -75,7 +75,7 @@ class SongCard extends React.Component {
           <div
             data-type="fav"
             className="icon"
-            onClick={this.clickFav}
+            onClick={this.onClickHandler}
             style={{ cursor: 'pointer' }}>
             <Icon icon="fav" fill={color} song={this.props.song} heart={heart} />
           </div>
