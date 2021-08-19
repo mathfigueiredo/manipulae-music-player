@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import Deezer from './icons/Deezer';
+import { showFavorites } from '../actions';
 import { lightGrey } from '../styles';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
+  onFavoritesClick = () => {
+    const { showFavorites } = this.props;
+    showFavorites(true);
+  };
+
   render() {
     const { color } = this.props;
     if (this.props.object.type === 'playlist') {
@@ -31,7 +37,9 @@ class Header extends React.Component {
             </a>
           </div>
           <div className="favorites-box">
-            <button className="favorites">Favorites</button>
+            <button className="favorites" onClick={this.onFavoritesClick}>
+              Favorites
+            </button>
           </div>
         </StyledHeader>
       );
@@ -56,7 +64,9 @@ class Header extends React.Component {
             </a>
           </div>
           <div className="favorites-box">
-            <button className="favorites">Favorites</button>
+            <button className="favorites" onClick={this.onFavoritesClick}>
+              Favorites
+            </button>
           </div>
         </StyledHeader>
       );
@@ -144,4 +154,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { showFavorites })(Header);

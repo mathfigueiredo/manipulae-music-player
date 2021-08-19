@@ -12,6 +12,7 @@ import changeColorReducer from './changeColorReducer';
 import toggleSearchWindowReducer from './toggleSearchWindowReducer';
 import changeSearchOptionReducer from './changeSearchOptionReducer';
 import changeAnimationDivReducer from './changeAnimationDivReducer';
+import showFavoritesReducer from './showFavoritesReducer';
 
 export default combineReducers({
   form: reducer,
@@ -24,6 +25,7 @@ export default combineReducers({
   selected: selectReducer,
   trackList: defineTrackListReducer,
   showTrackList: showTrackListReducer,
+  showFavorites: showFavoritesReducer,
   color: changeColorReducer,
   showSearchWindow: toggleSearchWindowReducer,
   animationDivLeft: changeAnimationDivReducer,

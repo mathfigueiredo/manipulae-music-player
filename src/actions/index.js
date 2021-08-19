@@ -64,6 +64,10 @@ export const showTrackList = (boolean) => {
   return { type: 'SHOW_TRACKLIST', payload: boolean };
 };
 
+export const showFavorites = (boolean) => {
+  return { type: 'SHOW_FAVORITES', payload: boolean };
+};
+
 export const addToFavorites = (song) => {
   return { type: 'ADD_FAVORITE', payload: song };
 };
