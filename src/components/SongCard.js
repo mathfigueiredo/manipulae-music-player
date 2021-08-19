@@ -82,7 +82,7 @@ const StyledSongCard = styled.div`
   color: ${lightGrey};
   width: 100%;
   padding: 0.5rem;
-  transition: all 1s;
+  transition: background-color 0.2s border-bottom 1s;
 
   display: flex;
   align-items: center;

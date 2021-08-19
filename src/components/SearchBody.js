@@ -9,7 +9,7 @@ class SearchBody extends React.Component {
     if (!searchForm.values && !searchForm.fields) {
       return <div>FAÇA SUA PESQUISA</div>;
     }
-    if (searchForm.values && Object.keys(songs.search).length === 0) {
+    if (searchForm.values && !songs.search[stateSearchOption]) {
       return <div>LOADING</div>;
     }
 
