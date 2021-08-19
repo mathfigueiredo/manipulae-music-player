@@ -92,8 +92,10 @@ class Player extends React.Component {
 
   clickFav = () => {
     const { currentSong, favorites, addToFavorites, removeFromFavorites } = this.props;
-    if (favorites.indexOf(currentSong) === -1) addToFavorites(currentSong);
-    else removeFromFavorites(currentSong);
+    if (currentSong) {
+      if (favorites.indexOf(currentSong) === -1) addToFavorites(currentSong);
+      else removeFromFavorites(currentSong);
+    }
   };
 
   componentDidUpdate() {
