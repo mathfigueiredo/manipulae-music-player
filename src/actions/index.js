@@ -56,3 +56,7 @@ export const nowPlaying = () => {
 export const nowPaused = () => {
   return { type: 'PAUSE' };
 };
+
+export const updateTime = (array) => {
+  return { type: 'UPDATE_TIME', payload: array };
+};

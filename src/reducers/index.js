@@ -7,11 +7,13 @@ import showTrackListReducer from './showTrackListReducer';
 import favoritesReducer from './favoritesReducer';
 import changeCurrentSongReducer from './changeCurrentSongReducer';
 import playPauseReducer from './playPauseReducer';
+import updateTimeReducer from './updateTimeReducer';
 
 export default combineReducers({
   form: reducer,
   currentSong: changeCurrentSongReducer,
   playPause: playPauseReducer,
+  currentTime: updateTimeReducer,
   songs: fetchReducer,
   favorites: favoritesReducer,
   selected: selectReducer,
