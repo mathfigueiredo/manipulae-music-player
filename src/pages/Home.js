@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 import SongsList from '../components/SongsList';
+import Favorites from '../components/Favorites';
 import Player from '../components/Player';
 import Header from '../components/Header';
 import { connect } from 'react-redux';
@@ -49,6 +50,7 @@ class Home extends React.Component {
         <Header object={selected} />
 
         <TrackList object={selected} trackList={trackList} />
+        <Favorites />
 
         <Player />
       </React.Fragment>

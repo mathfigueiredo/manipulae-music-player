@@ -3,19 +3,20 @@ import styled from 'styled-components';
 import SongsList from './SongsList';
 import { connect } from 'react-redux';
 
-class TrackListBody extends React.Component {
+class FavoritesBody extends React.Component {
   render() {
-    const songs = this.props.trackList.data;
+    const songs = this.props.favorites;
     return (
-      <StyledTrackListBody className="BODY">
+      <StyledFavoritesBody className="BODY">
         <SongsList songs={songs} from="tracklist" />
-      </StyledTrackListBody>
+      </StyledFavoritesBody>
     );
   }
 }
 
-const StyledTrackListBody = styled.div`
-  flex-basis: 70%;
+const StyledFavoritesBody = styled.div`
+  margin-top: 1rem;
+  flex-basis: 95%;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;
@@ -24,8 +25,8 @@ const StyledTrackListBody = styled.div`
 
 const mapStateToProps = (state) => {
   return {
-    trackList: state.trackList,
+    favorites: state.favorites,
   };
 };
 
-export default connect(mapStateToProps)(TrackListBody);
+export default connect(mapStateToProps)(FavoritesBody);
