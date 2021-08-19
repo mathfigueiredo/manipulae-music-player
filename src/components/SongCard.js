@@ -61,6 +61,8 @@ class SongCard extends React.Component {
     heart = favorites.indexOf(song) === -1 ? 'empty' : 'full';
     const minutes = Math.floor(duration / 60);
     const seconds = duration - minutes * 60;
+    let strSec = seconds.toString();
+    if (strSec.length === 1) strSec = `0${strSec}`;
     return (
       <StyledSongCard onClick={this.cardClickHandler} color={color}>
         <div className="left-div">
@@ -81,7 +83,7 @@ class SongCard extends React.Component {
             <div>
               {title} - {artist.name} | {album.title}
             </div>
-            <div>{`${minutes}:${seconds}`}</div>
+            <div>{`${minutes}:${strSec}`}</div>
           </div>
         </div>
         <div className="right-div">
