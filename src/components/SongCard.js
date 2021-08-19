@@ -4,7 +4,13 @@ import { lightGrey, darkGrey } from '../styles';
 import Icon from './Icon';
 import Deezer from './icons/Deezer';
 import { connect } from 'react-redux';
-import { addToFavorites, removeFromFavorites, changeCurrentSong, nowPlaying } from '../actions';
+import {
+  addToFavorites,
+  removeFromFavorites,
+  changeCurrentSong,
+  nowPlaying,
+  changeColor,
+} from '../actions';
 
 class SongCard extends React.Component {
   cardClickHandler = (e) => {
@@ -22,20 +28,21 @@ class SongCard extends React.Component {
   clickDeezer = () => {};
 
   changeCurrentSong = () => {
-    const { song, currentSong, changeCurrentSong, nowPlaying } = this.props;
+    const { song, currentSong, changeCurrentSong, nowPlaying, changeColor } = this.props;
     if (currentSong !== song) changeCurrentSong(song);
     nowPlaying();
+    changeColor();
   };
 
   render() {
-    const { song, currentSong, favorites } = this.props;
+    const { song, currentSong, favorites, color } = this.props;
     const { id, title, duration, preview, artist, album, md5_image, link } = song;
     let heart;
     heart = favorites.indexOf(song) === -1 ? 'empty' : 'full';
     const minutes = Math.floor(duration / 60);
     const seconds = duration - minutes * 60;
     return (
-      <StyledSongCard onClick={this.cardClickHandler}>
+      <StyledSongCard onClick={this.cardClickHandler} color={color}>
         <div className="left-div">
           <div className="img-div">
             <img
@@ -48,14 +55,7 @@ class SongCard extends React.Component {
             className="icon"
             onClick={this.clickFav}
             style={{ cursor: 'pointer' }}>
-            <Icon
-              icon="fav"
-              // fill={lightGrey}
-              song={this.props.song}
-              heart={heart}
-              fill="transparent"
-              clipPath={`heart${heart}`}
-            />
+            <Icon icon="fav" fill={color} song={this.props.song} heart={heart} />
           </div>
           <div className="details">
             <div>
@@ -78,10 +78,11 @@ class SongCard extends React.Component {
 
 const StyledSongCard = styled.div`
   cursor: pointer;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid ${(props) => (props.color ? props.color : 'white')};
   color: ${lightGrey};
   width: 100%;
   padding: 0.5rem;
+  transition: all 1s;
 
   display: flex;
   align-items: center;
@@ -121,6 +122,7 @@ const mapStateToProps = (state) => {
   return {
     currentSong: state.currentSong,
     favorites: state.favorites,
+    color: state.color,
   };
 };
 
@@ -129,4 +131,5 @@ export default connect(mapStateToProps, {
   removeFromFavorites,
   changeCurrentSong,
   nowPlaying,
+  changeColor,
 })(SongCard);

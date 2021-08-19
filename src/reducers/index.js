@@ -8,6 +8,7 @@ import favoritesReducer from './favoritesReducer';
 import changeCurrentSongReducer from './changeCurrentSongReducer';
 import playPauseReducer from './playPauseReducer';
 import updateTimeReducer from './updateTimeReducer';
+import changeColorReducer from './changeColorReducer';
 
 export default combineReducers({
   form: reducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   selected: selectReducer,
   trackList: defineTrackListReducer,
   showTrackList: showTrackListReducer,
+  color: changeColorReducer,
 });

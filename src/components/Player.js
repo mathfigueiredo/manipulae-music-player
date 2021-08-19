@@ -8,6 +8,7 @@ import {
   updateTime,
   addToFavorites,
   removeFromFavorites,
+  changeColor,
 } from '../actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -41,9 +42,11 @@ class Player extends React.Component {
       trackList: { data },
       currentSong,
       changeCurrentSong,
+      changeColor,
     } = this.props;
     const previousSongIndex = data.indexOf(currentSong) - 1;
     if (previousSongIndex >= 0) changeCurrentSong(data[previousSongIndex]);
+    changeColor();
   };
 
   onForwardClick = () => {
@@ -51,9 +54,11 @@ class Player extends React.Component {
       trackList: { data },
       currentSong,
       changeCurrentSong,
+      changeColor,
     } = this.props;
     const nextSongIndex = data.indexOf(currentSong) + 1;
     if (nextSongIndex < data.length) changeCurrentSong(data[nextSongIndex]);
+    changeColor();
   };
 
   onPlayPauseClick = (e) => {
@@ -89,7 +94,7 @@ class Player extends React.Component {
   }
 
   render() {
-    const { currentSong, playPause, currentTime, favorites } = this.props;
+    const { currentSong, playPause, currentTime, favorites, color } = this.props;
     const preview = currentSong ? currentSong.preview : null;
     const currentPlayPause = playPause === 'playing' ? 'pause' : 'play';
     let heart;
@@ -113,7 +118,7 @@ class Player extends React.Component {
       : null;
 
     return (
-      <StyledPlayer>
+      <StyledPlayer color={color}>
         <div className="time-control">
           <p>{actualTime}</p>
           <div className="bar">
@@ -130,28 +135,23 @@ class Player extends React.Component {
         </div>
         <div className="play-control">
           <div onClick={this.onBackwardClick} style={{ cursor: 'pointer' }}>
-            <Icon icon="backward" fill="transparent" clipPath="backward" />
+            <Icon icon="backward" fill={color} />
           </div>
           <div onClick={this.onPlayPauseClick} style={{ cursor: 'pointer' }}>
-            <Icon
-              icon="playpause"
-              current={currentPlayPause}
-              fill="transparent"
-              clipPath={currentPlayPause}
-            />
+            <Icon icon="playpause" current={currentPlayPause} fill={color} />
           </div>
           <div onClick={this.onForwardClick} style={{ cursor: 'pointer' }}>
-            <Icon icon="forward" fill="transparent" clipPath="forward" />
+            <Icon icon="forward" fill={color} />
           </div>
         </div>
         <div className="tracklist-and-like">
           <div
             onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}
             style={{ cursor: 'pointer' }}>
-            <Icon icon="tracklist" fill="transparent" clipPath="tracklist" />
+            <Icon icon="tracklist" fill={color} />
           </div>
           <div onClick={this.clickFav} style={{ cursor: 'pointer' }}>
-            <Icon icon="fav" heart={heart} fill="transparent" clipPath={`heart${heart}`} />
+            <Icon icon="fav" heart={heart} fill={color} />
           </div>
         </div>
         <audio onTimeUpdate={this.onTimeUpdateHandler} ref={this.audioRef} src={preview}></audio>
@@ -169,7 +169,7 @@ const StyledPlayer = styled.div`
   /* flex-direction: column; */
   align-items: center;
   justify-content: space-between;
-  background-color: green;
+  background-color: black;
   z-index: 2;
 
   .time-control {
@@ -181,13 +181,14 @@ const StyledPlayer = styled.div`
 
     .bar {
       /* background-color: aqua; */
-      background: black;
+      background: ${(props) => (props.color ? props.color : 'black')};
       width: 100%;
       height: 3px;
       position: relative;
       border-radius: 1rem;
       overflow: hidden;
       align-self: center;
+      transition: all 1s;
     }
 
     .animate-bar {
@@ -216,7 +217,9 @@ const StyledPlayer = styled.div`
     p {
       padding: 0rem;
       font-size: 0.9rem;
+      color: ${(props) => (props.color ? props.color : 'white')};
       flex-basis: 15%;
+      transition: all 1s;
     }
   }
 
@@ -249,6 +252,7 @@ const mapStateToProps = (state) => {
     favorites: state.favorites,
     trackList: state.trackList,
     trackListIsOnScreen: state.showTrackList.show,
+    color: state.color,
   };
 };
 
@@ -260,4 +264,5 @@ export default connect(mapStateToProps, {
   updateTime,
   addToFavorites,
   removeFromFavorites,
+  changeColor,
 })(Player);

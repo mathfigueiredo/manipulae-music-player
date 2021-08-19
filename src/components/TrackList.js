@@ -18,7 +18,6 @@ class TrackList extends React.Component {
             exit={{ y: '100%' }}
             transition={{ type: 'spring', duration: 1 }}>
             <TrackListHeader />
-            <StyledBottomLine></StyledBottomLine>
             <TrackListBody />
           </StyledDiv>
         ) : null}
@@ -37,13 +36,6 @@ const StyledDiv = styled(motion.div)`
 
   display: flex;
   flex-direction: column;
-`;
-
-const StyledBottomLine = styled.div`
-  margin: 0 auto;
-  min-height: 1px;
-  width: 95%;
-  background-color: gold;
 `;
 
 const mapStateToProps = (state) => {

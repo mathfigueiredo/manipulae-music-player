@@ -6,3 +6,6 @@ export const darkLightColor = '#7f8fa6';
 
 export const lightGrey = '#ccc';
 export const darkGrey = '#222';
+
+// rgb(32, 227, 185)
+// rgb(2, 182, 175)

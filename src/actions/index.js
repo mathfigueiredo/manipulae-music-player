@@ -60,3 +60,20 @@ export const nowPaused = () => {
 export const updateTime = (array) => {
   return { type: 'UPDATE_TIME', payload: array };
 };
+
+export const generateRGB = () => {
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  while (r <= 60 && g <= 60 && b <= 60) {
+    r = Math.trunc(Math.random() * 255) + 1;
+    g = Math.trunc(Math.random() * 255) + 1;
+    b = Math.trunc(Math.random() * 255) + 1;
+  }
+  return `rgb(${r},${g},${b})`;
+};
+
+export const changeColor = () => {
+  const color = generateRGB();
+  return { type: 'CHANGE_COLOR', payload: color };
+};
