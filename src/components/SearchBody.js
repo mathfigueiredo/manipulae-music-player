@@ -2,15 +2,22 @@ import React from 'react';
 import SongsList from './SongsList';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/react';
 
 class SearchBody extends React.Component {
   renderResults = () => {
     const { searchForm, songs, stateSearchOption } = this.props;
     if (!searchForm.values && !searchForm.fields) {
-      return <div>FAÇA SUA PESQUISA</div>;
+      return null;
     }
     if (searchForm.values && !songs.search[stateSearchOption]) {
-      return <div>LOADING</div>;
+      const { color } = this.props;
+      return (
+        <div>
+          <ClipLoader color={color} css={loadingCSS} />
+        </div>
+      );
     }
 
     let list;
@@ -41,11 +48,20 @@ const StyledSearchBody = styled.div`
   }
 `;
 
+const loadingCSS = css`
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const mapStateToProps = (state) => {
   return {
     searchForm: state.form.searchForm,
     stateSearchOption: state.searchOption,
     songs: state.songs,
+    color: state.color,
   };
 };
 

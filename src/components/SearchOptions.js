@@ -14,25 +14,16 @@ class SearchOptions extends React.Component {
   };
 
   render() {
-    const { color, animationDivLeft } = this.props;
+    const { color, animationDivLeft, songs } = this.props;
     return (
-      <StyledSearchOptions color={color} animationDivLeft={animationDivLeft}>
-        <div
-          data-pos={0}
-          className="search-option tracks"
-          onClick={() => this.onSearchOptionChange('tracks')}>
+      <StyledSearchOptions color={color} animationDivLeft={animationDivLeft} songs={songs}>
+        <div className="search-option tracks" onClick={() => this.onSearchOptionChange('tracks')}>
           <span className="option">Tracks</span>
         </div>
-        <div
-          data-pos={1}
-          className="search-option artists"
-          onClick={() => this.onSearchOptionChange('artists')}>
+        <div className="search-option artists" onClick={() => this.onSearchOptionChange('artists')}>
           <span className="option">Artists</span>
         </div>
-        <div
-          data-pos={2}
-          className="search-option albums"
-          onClick={() => this.onSearchOptionChange('albums')}>
+        <div className="search-option albums" onClick={() => this.onSearchOptionChange('albums')}>
           <span className="option">Albums</span>
         </div>
         <div className="animation"></div>
@@ -50,13 +41,17 @@ const StyledSearchOptions = styled.div`
   align-items: center;
   justify-content: space-around;
 
+  font-family: sans-serif;
+  font-size: 1.5rem;
+
   .search-option {
     cursor: pointer;
-    /* flex-basis: 15%; */
     text-align: center;
     align-self: stretch;
+    flex-basis: 30%;
 
     display: flex;
+    opacity: ${(props) => (Object.keys(props.songs.search).length === 0 ? 0 : 1)};
 
     .option {
       display: block;
@@ -73,6 +68,7 @@ const StyledSearchOptions = styled.div`
     bottom: 5px;
     left: ${(props) => (props.animationDivLeft ? props.animationDivLeft : '100%')};
     transition: left 0.5s, background-color 1s;
+    opacity: ${(props) => (Object.keys(props.songs.search).length === 0 ? 0 : 1)};
   }
 
   .tracks {
@@ -87,6 +83,7 @@ const mapStateToProps = (state) => {
     stateSearchOption: state.searchOption,
     color: state.color,
     animationDivLeft: state.animationDivLeft,
+    songs: state.songs,
   };
 };
 

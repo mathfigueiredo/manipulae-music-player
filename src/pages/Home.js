@@ -17,6 +17,8 @@ import TrackList from '../components/TrackList';
 import { motion } from 'framer-motion';
 import { slideUpAnimation } from '../animations';
 import SearchWindow from '../components/SearchWindow';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/react';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -42,8 +44,13 @@ class Home extends React.Component {
   };
 
   renderHeader = () => {
-    const { search, popular, selected, showTrackList, trackList } = this.props;
-    if (Object.entries(selected).length === 0) return <div>Loading...</div>;
+    const { search, popular, selected, showTrackList, trackList, color } = this.props;
+    if (Object.entries(selected).length === 0)
+      return (
+        <div>
+          <ClipLoader color={color} css={loadingCSS} />
+        </div>
+      );
     let songs;
     return (
       <React.Fragment>
@@ -74,6 +81,14 @@ const StyledHomeDiv = styled.div`
   overflow: hidden;
 `;
 
+const loadingCSS = css`
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const mapStateToProps = (state) => {
   return {
     popular: state.songs.popular,
@@ -81,6 +96,7 @@ const mapStateToProps = (state) => {
     selected: state.selected,
     showTrackList: state.showTrackList.show,
     trackList: state.trackList,
+    color: state.color,
   };
 };
 

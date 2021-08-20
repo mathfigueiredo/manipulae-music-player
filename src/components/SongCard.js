@@ -109,6 +109,7 @@ const StyledSongCard = styled.div`
   width: 100%;
   padding: 0.5rem;
   transition: background-color 0.2s border-bottom 1s;
+  font-family: sans-serif;
 
   display: flex;
   align-items: center;
