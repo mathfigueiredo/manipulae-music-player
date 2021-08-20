@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 class SearchOptions extends React.Component {
   onSearchOptionChange = (searchOption) => {
-    const { changeSearchOption, stateSearchOption, changeAnimationDivLeft, color } = this.props;
+    const { changeSearchOption, stateSearchOption, changeAnimationDivLeft } = this.props;
     if (searchOption !== stateSearchOption) changeSearchOption(searchOption);
     if (searchOption === 'tracks') changeAnimationDivLeft('4rem');
     if (searchOption === 'artists') changeAnimationDivLeft('calc((100vw / 3) + 4rem)');

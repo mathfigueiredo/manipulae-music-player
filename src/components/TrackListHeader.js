@@ -7,7 +7,7 @@ class TrackListHeader extends React.Component {
   render() {
     const { color } = this.props;
     if (this.props.selected.type === 'playlist') {
-      const { title, duration, nb_tracks, fans, link, picture_medium, tracks } =
+      const { title, duration, nb_tracks, picture_medium } =
         this.props.selected;
       let minutes, seconds, hours;
       if (duration > 3599) {
@@ -35,7 +35,7 @@ class TrackListHeader extends React.Component {
     }
 
     if (this.props.object.type === 'track') {
-      const { title, duration, id, link, md5_image, artist } = this.props.object;
+      const { title, duration, md5_image, artist } = this.props.object;
       const minutes = Math.floor(duration / 60);
       const seconds = duration - minutes * 60;
 

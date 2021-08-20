@@ -14,7 +14,7 @@ class Header extends React.Component {
   render() {
     const { color } = this.props;
     if (this.props.object.type === 'playlist') {
-      const { title, duration, nb_tracks, fans, link, picture_big, tracks } = this.props.object;
+      const { title, duration, nb_tracks, link, picture_big } = this.props.object;
       let minutes, seconds, hours;
       if (duration > 3599) {
         hours = Math.floor(duration / 3600);
@@ -46,7 +46,7 @@ class Header extends React.Component {
     }
 
     if (this.props.object.type === 'track') {
-      const { title, duration, id, link, md5_image, artist } = this.props.object;
+      const { title, duration, link, md5_image } = this.props.object;
       const minutes = Math.floor(duration / 60);
       const seconds = duration - minutes * 60;
 

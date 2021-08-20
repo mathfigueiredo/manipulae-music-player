@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
-import SongsList from '../components/SongsList';
 import Favorites from '../components/Favorites';
 import Player from '../components/Player';
 import Header from '../components/Header';
@@ -14,8 +13,6 @@ import {
 } from '../actions';
 import styled from 'styled-components';
 import TrackList from '../components/TrackList';
-import { motion } from 'framer-motion';
-import { slideUpAnimation } from '../animations';
 import SearchWindow from '../components/SearchWindow';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/react';
@@ -44,14 +41,13 @@ class Home extends React.Component {
   };
 
   renderHeader = () => {
-    const { search, popular, selected, showTrackList, trackList, color } = this.props;
+    const { selected, trackList, color } = this.props;
     if (Object.entries(selected).length === 0)
       return (
         <div>
           <ClipLoader color={color} css={loadingCSS} />
         </div>
       );
-    let songs;
     return (
       <React.Fragment>
         <Header object={selected} />

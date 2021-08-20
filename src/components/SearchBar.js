@@ -13,9 +13,8 @@ import styled from 'styled-components';
 
 class SearchBar extends React.Component {
   onSearchChange = (e) => {
-    const { fetchSearchTracks, fetchSearchArtists, fetchSearchAlbums, stateSearchOption } =
+    const { fetchSearchTracks, fetchSearchArtists, fetchSearchAlbums } =
       this.props;
-    let fetchFunction;
     if (e.target.value !== '') {
       if (this.timer) clearTimeout(this.timer);
       this.timer = setTimeout(() => {

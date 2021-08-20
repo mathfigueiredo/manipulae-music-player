@@ -2,7 +2,6 @@ import React from 'react';
 import SearchOptions from './SearchOptions';
 import SearchBody from './SearchBody';
 import { connect } from 'react-redux';
-import { darkColor, lightGrey } from '../styles';
 import { toggleSearchWingow } from '../actions';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
