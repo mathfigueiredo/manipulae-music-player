@@ -7,6 +7,12 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
 }
+
+html {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
 body{
     background-color: ${darkColor};
 }
