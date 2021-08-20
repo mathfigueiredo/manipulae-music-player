@@ -105,7 +105,7 @@ const StyledSongCard = styled.div`
   color: ${lightGrey};
   width: 100%;
   padding: 0.5rem;
-  transition: background-color 0.2s border-bottom 1s;
+  transition: background-color 0.2s, border-bottom 1s;
   font-family: sans-serif;
 
   display: flex;
