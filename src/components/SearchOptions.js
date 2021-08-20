@@ -76,6 +76,17 @@ const StyledSearchOptions = styled.div`
       left: 0;
     }
   }
+
+  @media only screen and (max-width: 1000px) {
+    .search-option {
+      cursor: default;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    margin-top: 4rem;
+    font-size: 1.2rem;
+  }
 `;
 
 const mapStateToProps = (state) => {

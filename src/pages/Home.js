@@ -75,6 +75,7 @@ const StyledHomeDiv = styled.div`
   height: 100vh;
   position: relative;
   overflow: hidden;
+  min-width: 350px;
 `;
 
 const loadingCSS = css`

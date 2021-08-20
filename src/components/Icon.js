@@ -110,6 +110,10 @@ const StyledSvg = styled.svg`
   cursor: pointer;
   fill: ${(props) => (props.fill ? props.fill : 'black')};
   transition: all 1s;
+
+  @media only screen and (max-width: 1000px) {
+    cursor: default;
+  }
 `;
 
 export default Icon;

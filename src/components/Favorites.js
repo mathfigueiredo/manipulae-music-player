@@ -1,6 +1,7 @@
 import React from 'react';
 import FavoritesHeader from './FavoritesHeader';
 import FavoritesBody from './FavoritesBody';
+import DownArrow from './icons/DownArrow';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { showFavorites } from '../actions';
@@ -23,7 +24,7 @@ class Favorites extends React.Component {
             exit={{ y: '100%' }}
             transition={{ type: 'spring', duration: 1 }}>
             <div className="close-div" onClick={this.onCloseWindow}>
-              <span className="close-button">&#8964;</span>
+              <DownArrow />
             </div>
             <FavoritesHeader />
             <FavoritesBody />
@@ -66,6 +67,12 @@ const StyledDiv = styled(motion.div)`
       font-size: 2.5rem;
       color: ${(props) => props.color || 'white'};
       transition: all 1s;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .close-div {
+      cursor: default;
     }
   }
 `;

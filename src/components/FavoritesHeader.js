@@ -25,6 +25,14 @@ const StyledDiv = styled.div`
   padding-top: 1rem;
   font-family: sans-serif;
   cursor: default;
+
+  @media only screen and (max-width: 700px) {
+    font-size: 1.5rem;
+  }
+
+  @media only screen and (max-width: 500px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const mapStateToProps = (state) => {

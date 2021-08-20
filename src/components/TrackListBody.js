@@ -20,6 +20,10 @@ const StyledTrackListBody = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+
+  @media only screen and (max-width: 450px) {
+    /* flex-basis: 85%; */
+  }
 `;
 
 const mapStateToProps = (state) => {

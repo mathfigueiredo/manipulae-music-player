@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { showTrackList } from '../actions';
 import { motion, AnimatePresence } from 'framer-motion';
+import DownArrow from './icons/DownArrow';
 
 class TrackList extends React.Component {
   onCloseWindow = () => {
@@ -23,7 +24,7 @@ class TrackList extends React.Component {
             exit={{ y: '100%' }}
             transition={{ type: 'spring', duration: 1 }}>
             <div className="close-div" onClick={this.onCloseWindow}>
-              <span className="close-button">&#8964;</span>
+              <DownArrow />
             </div>
             <TrackListHeader object={this.props.object} />
             <TrackListBody />
@@ -66,6 +67,12 @@ const StyledDiv = styled(motion.div)`
       font-size: 2.5rem;
       color: ${(props) => props.color || 'white'};
       transition: all 1s;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .close-div {
+      cursor: default;
     }
   }
 `;

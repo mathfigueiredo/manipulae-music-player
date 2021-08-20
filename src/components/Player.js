@@ -147,23 +147,21 @@ class Player extends React.Component {
           <p>{endTime}</p>
         </div>
         <div className="play-control">
-          <div onClick={this.onBackwardClick} style={{ cursor: 'pointer' }}>
+          <div onClick={this.onBackwardClick}>
             <Icon icon="backward" fill={color} />
           </div>
-          <div onClick={this.onPlayPauseClick} style={{ cursor: 'pointer' }}>
+          <div onClick={this.onPlayPauseClick}>
             <Icon icon="playpause" current={currentPlayPause} fill={color} />
           </div>
-          <div onClick={this.onForwardClick} style={{ cursor: 'pointer' }}>
+          <div onClick={this.onForwardClick}>
             <Icon icon="forward" fill={color} />
           </div>
         </div>
         <div className="tracklist-and-like">
-          <div
-            onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}
-            style={{ cursor: 'pointer' }}>
+          <div onClick={() => this.toggleTrackList(!this.props.trackListIsOnScreen)}>
             <Icon icon="tracklist" fill={color} />
           </div>
-          <div onClick={this.clickFav} style={{ cursor: 'pointer' }}>
+          <div onClick={this.clickFav}>
             <Icon icon="fav" heart={heart} fill={color} />
           </div>
         </div>
@@ -263,6 +261,29 @@ const StyledPlayer = styled.div`
     flex-grow: 1;
     order: 2;
     display: flex;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .time-control {
+      .animate-bar {
+        cursor: default;
+      }
+    }
+
+    .play-control {
+      svg {
+        cursor: default;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    p.song-title {
+      display: none;
+    }
+    .time-control {
+      display: none;
+    }
   }
 `;
 

@@ -7,8 +7,7 @@ class TrackListHeader extends React.Component {
   render() {
     const { color } = this.props;
     if (this.props.selected.type === 'playlist') {
-      const { title, duration, nb_tracks, picture_medium } =
-        this.props.selected;
+      const { title, duration, nb_tracks, picture_medium } = this.props.selected;
       let minutes, seconds, hours;
       if (duration > 3599) {
         hours = Math.floor(duration / 3600);
@@ -82,6 +81,24 @@ const StyledDiv = styled.div`
     p {
       font-size: 1rem;
       margin-top: 0.1rem;
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .details {
+      font-size: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    /* flex-basis: 15%; */
+
+    img {
+      margin: 0 auto;
+      height: 10rem;
+    }
+    .details {
+      display: none;
     }
   }
 `;

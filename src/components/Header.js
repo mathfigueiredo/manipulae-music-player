@@ -1,11 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import Deezer from './icons/Deezer';
-import { showFavorites } from '../actions';
+import { showFavorites, changeCurrentSong, nowPlaying } from '../actions';
 import { lightGrey } from '../styles';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
+  onCoverClick = () => {
+    const { currentSong, trackList, changeCurrentSong, nowPlaying } = this.props;
+    if (!currentSong) {
+      changeCurrentSong(trackList.data[0]);
+      nowPlaying();
+    }
+  };
+
   onFavoritesClick = () => {
     const { showFavorites } = this.props;
     showFavorites(true);
@@ -26,7 +34,7 @@ class Header extends React.Component {
 
       return (
         <StyledHeader color={color}>
-          <img src={picture_big} alt="" />
+          <img src={picture_big} alt="Playlsit Cover" onClick={this.onCoverClick} />
           <p className="details">
             {nb_tracks} Tracks | {hours ? `${hours}h ${minutes}m` : `${minutes}m ${seconds}s`}
           </p>
@@ -100,6 +108,7 @@ const StyledHeader = styled.div`
   font-family: sans-serif;
   img {
     max-height: 60vh;
+    cursor: pointer;
     &:hover {
       outline: 1px solid ${(props) => (props.color ? props.color : 'none')};
     }
@@ -146,12 +155,35 @@ const StyledHeader = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 1000px) {
+    .favorites-box {
+      .favorites {
+        cursor: default;
+      }
+    }
+
+    .deezer {
+      a {
+        cursor: default;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    font-size: 0.8rem;
+    img {
+      height: 15rem;
+    }
+  }
 `;
 
 const mapStateToProps = (state) => {
   return {
+    currentSong: state.currentSong,
+    trackList: state.trackList,
     color: state.color,
   };
 };
 
-export default connect(mapStateToProps, { showFavorites })(Header);
+export default connect(mapStateToProps, { showFavorites, changeCurrentSong, nowPlaying })(Header);

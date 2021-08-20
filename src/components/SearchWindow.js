@@ -57,7 +57,7 @@ const StyledSearchWindow = styled(motion.div)`
     justify-content: center;
     position: absolute;
     right: 2rem;
-    top: 2rem;
+    top: 1rem;
     cursor: pointer;
     transition: all 0.2s;
 
@@ -70,6 +70,12 @@ const StyledSearchWindow = styled(motion.div)`
       font-size: 2.5rem;
       color: ${(props) => props.color || 'white'};
       transition: all 1s;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .close-div {
+      cursor: default;
     }
   }
 `;

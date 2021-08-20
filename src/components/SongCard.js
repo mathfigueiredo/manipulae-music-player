@@ -76,16 +76,13 @@ class SongCard extends React.Component {
               alt="song logo"
             />
           </div>
-          <div
-            data-type="fav"
-            className="icon"
-            onClick={this.onClickHandler}
-            style={{ cursor: 'pointer' }}>
+          <div data-type="fav" className="icon" onClick={this.onClickHandler}>
             <Icon icon="fav" fill={color} song={this.props.song} heart={heart} />
           </div>
           <div className="details">
             <div>
-              {title} - {artist.name} | {album.title}
+              {title} <span className="artist-name">- {artist.name}</span>{' '}
+              <span className="album-name">| {album.title}</span>
             </div>
             <div>{`${minutes}:${strSec}`}</div>
           </div>
@@ -141,6 +138,49 @@ const StyledSongCard = styled.div`
 
     .deezer {
       margin-right: 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    cursor: default;
+
+    .right-div {
+      .deezer {
+        a {
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    font-size: 0.8rem;
+
+    .left-div {
+      .details {
+        .album-name {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .left-div {
+      .img-div {
+        margin-left: 0;
+      }
+      .details {
+        .artist-name {
+          display: none;
+        }
+      }
+    }
+
+    .right-div {
+      .deezer {
+        margin-right: 0;
+      }
     }
   }
 `;
