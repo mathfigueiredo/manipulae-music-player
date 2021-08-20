@@ -51,7 +51,6 @@ const StyledSearchOptions = styled.div`
     flex-basis: 30%;
 
     display: flex;
-    opacity: ${(props) => (Object.keys(props.songs.search).length === 0 ? 0 : 1)};
 
     .option {
       display: block;
@@ -68,7 +67,6 @@ const StyledSearchOptions = styled.div`
     bottom: 5px;
     left: ${(props) => (props.animationDivLeft ? props.animationDivLeft : '100%')};
     transition: left 0.5s, background-color 1s;
-    opacity: ${(props) => (Object.keys(props.songs.search).length === 0 ? 0 : 1)};
   }
 
   .tracks {
