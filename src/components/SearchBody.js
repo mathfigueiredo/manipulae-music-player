@@ -8,9 +8,6 @@ import { css } from '@emotion/react';
 class SearchBody extends React.Component {
   renderResults = () => {
     const { searchForm, songs, stateSearchOption } = this.props;
-    if (!searchForm.values && !searchForm.fields) {
-      return null;
-    }
     if (searchForm.values && !songs.search[stateSearchOption]) {
       const { color } = this.props;
       return (
@@ -20,20 +17,17 @@ class SearchBody extends React.Component {
       );
     }
 
-    let list;
-    if (stateSearchOption === 'tracks') list = songs.search.tracks;
-    if (stateSearchOption === 'artists') list = songs.search.artists;
-    if (stateSearchOption === 'albums') list = songs.search.albums;
-    return <SongsList songs={list} from="search" />;
+    if (Object.keys(songs.search).length > 0) {
+      let list;
+      if (stateSearchOption === 'tracks') list = songs.search.tracks;
+      if (stateSearchOption === 'artists') list = songs.search.artists;
+      if (stateSearchOption === 'albums') list = songs.search.albums;
+      return <SongsList songs={list} from="search" />;
+    }
   };
 
   render() {
-    return (
-      <StyledSearchBody>
-        {this.renderResults()}
-        {/* {songs ? <SongsList songs={songs} /> : 'WAITING SEARCH'} */}
-      </StyledSearchBody>
-    );
+    return <StyledSearchBody>{this.renderResults()}</StyledSearchBody>;
   }
 }
 

@@ -10,6 +10,7 @@ import {
 } from '../actions';
 import Magnifier from './icons/Magnifier';
 import styled from 'styled-components';
+import { reset } from 'redux-form';
 
 class SearchBar extends React.Component {
   onSearchChange = (e) => {
@@ -21,8 +22,6 @@ class SearchBar extends React.Component {
         fetchSearchArtists(e);
         fetchSearchAlbums(e);
       }, 500);
-    } else {
-      // this.props.deleteSearch();
     }
   };
 
@@ -43,9 +42,9 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    const { color } = this.props;
+    const { color, reset } = this.props;
     return (
-      <StyledForm color={color} onSubmit={(e) => e.preventDefault()}>
+      <StyledForm color={color} onBlur={reset} onSubmit={(e) => e.preventDefault()}>
         <Field name="query" component={this.renderInput} onChange={this.onSearchChange} />
 
         <Magnifier />
@@ -99,4 +98,5 @@ export default connect(mapStateToProps, {
   fetchSearchArtists,
   fetchSearchAlbums,
   toggleSearchWingow,
+  reset,
 })(form);
