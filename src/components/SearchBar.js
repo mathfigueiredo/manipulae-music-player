@@ -13,8 +13,7 @@ import styled from 'styled-components';
 
 class SearchBar extends React.Component {
   onSearchChange = (e) => {
-    const { fetchSearchTracks, fetchSearchArtists, fetchSearchAlbums } =
-      this.props;
+    const { fetchSearchTracks, fetchSearchArtists, fetchSearchAlbums } = this.props;
     if (e.target.value !== '') {
       if (this.timer) clearTimeout(this.timer);
       this.timer = setTimeout(() => {
@@ -46,7 +45,7 @@ class SearchBar extends React.Component {
   render() {
     const { color } = this.props;
     return (
-      <StyledForm color={color}>
+      <StyledForm color={color} onSubmit={(e) => e.preventDefault()}>
         <Field name="query" component={this.renderInput} onChange={this.onSearchChange} />
 
         <Magnifier />
