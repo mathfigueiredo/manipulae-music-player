@@ -8,7 +8,7 @@ class FavoritesBody extends React.Component {
     const songs = this.props.favorites;
     return (
       <StyledFavoritesBody className="BODY">
-        <SongsList songs={songs} from="tracklist" />
+        <SongsList songs={songs} from="favorites" />
       </StyledFavoritesBody>
     );
   }

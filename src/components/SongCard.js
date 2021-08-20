@@ -41,6 +41,7 @@ class SongCard extends React.Component {
       newSelect,
       stateSearchOption,
       songs,
+      favorites,
       from,
     } = this.props;
     if (currentSong !== song) {
@@ -49,6 +50,9 @@ class SongCard extends React.Component {
     }
     if (from === 'search' && trackList !== songs.search[stateSearchOption]) {
       defineTrackList(songs.search[stateSearchOption]);
+    }
+    if (from === 'favorites' && trackList !== favorites) {
+      defineTrackList(favorites);
     }
     nowPlaying();
     changeColor();
