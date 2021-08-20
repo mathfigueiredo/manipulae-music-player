@@ -25,6 +25,7 @@ const StyledDiv = styled.div`
   padding-top: 1rem;
   font-family: sans-serif;
   cursor: default;
+  transition: all 1s;
 
   @media only screen and (max-width: 700px) {
     font-size: 1.5rem;
