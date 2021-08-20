@@ -174,6 +174,7 @@ const StyledHeader = styled.div`
     font-size: 0.8rem;
     img {
       height: 15rem;
+      cursor: default;
     }
   }
 `;
