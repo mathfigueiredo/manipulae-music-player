@@ -97,6 +97,35 @@ class Icon extends React.Component {
           </StyledSvg>
         );
 
+      case 'volplus':
+        return (
+          <StyledSvg
+            data-type="plus"
+            fill={this.props.fill}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24">
+            <path
+              data-type="plus"
+              d="M5 16h-5v-8h5v8zm2-8v8l7 5v-18l-7 5zm17 3h-3v-3h-2v3h-3v2h3v3h2v-3h3v-2z"
+            />
+          </StyledSvg>
+        );
+
+      case 'volminus':
+        return (
+          <StyledSvg
+            data-type="minus"
+            fill={this.props.fill}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24">
+            <path data-type="minus" d="M5 16h-5v-8h5v8zm2-8v8l7 5v-18l-7 5zm17 3h-8v2h8v-2z" />
+          </StyledSvg>
+        );
+
       default:
         return <div></div>;
     }

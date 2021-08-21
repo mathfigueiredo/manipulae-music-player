@@ -1,11 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import Icon from './Icon';
 import Deezer from './icons/Deezer';
-import { showFavorites, changeCurrentSong, nowPlaying } from '../actions';
+import { showFavorites, changeCurrentSong, nowPlaying, changeVolume } from '../actions';
 import { lightGrey } from '../styles';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
+  onVolumeChange = (e) => {
+    const { volume, changeVolume } = this.props;
+    if (e.target.dataset.type === 'plus' && volume < 1) {
+      let newVolume = volume + 0.2 > 1 ? 1 : volume + 0.2;
+      changeVolume(Number(newVolume.toFixed(1)));
+    }
+    if (e.target.dataset.type === 'minus' && volume > 0) {
+      let newVolume = volume - 0.2 < 0 ? 0 : volume - 0.2;
+      changeVolume(Number(newVolume.toFixed(1)));
+    }
+  };
+
   onCoverClick = () => {
     const { currentSong, trackList, changeCurrentSong, nowPlaying } = this.props;
     if (!currentSong) {
@@ -44,7 +57,12 @@ class Header extends React.Component {
               <Deezer />
             </a>
           </div>
+
           <div className="favorites-box">
+            <div className="volume-box" onClick={this.onVolumeChange}>
+              <Icon icon="volminus" fill={color} />
+              <Icon icon="volplus" fill={color} />
+            </div>
             <button className="favorites" onClick={this.onFavoritesClick}>
               Favorites
             </button>
@@ -71,7 +89,12 @@ class Header extends React.Component {
               <Deezer />
             </a>
           </div>
+
           <div className="favorites-box">
+            <div className="volume-box" onClick={this.onVolumeChange}>
+              <Icon icon="volminus" fill={color} />
+              <Icon icon="volplus" fill={color} />
+            </div>
             <button className="favorites" onClick={this.onFavoritesClick}>
               Favorites
             </button>
@@ -106,6 +129,15 @@ const StyledHeader = styled.div`
   justify-content: center;
   color: ${lightGrey};
   font-family: sans-serif;
+
+  .volume-box {
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   img {
     max-height: 60vh;
     cursor: pointer;
@@ -128,7 +160,7 @@ const StyledHeader = styled.div`
   .favorites-box {
     position: absolute;
     height: 80px;
-    width: 80px;
+    width: 160px;
     right: 2rem;
     bottom: 3rem;
     display: flex;
@@ -136,6 +168,7 @@ const StyledHeader = styled.div`
     justify-content: center;
 
     .favorites {
+      margin-left: 1rem;
       width: 80px;
       height: 30px;
       color: white;
@@ -184,7 +217,13 @@ const mapStateToProps = (state) => {
     currentSong: state.currentSong,
     trackList: state.trackList,
     color: state.color,
+    volume: state.volume,
   };
 };
 
-export default connect(mapStateToProps, { showFavorites, changeCurrentSong, nowPlaying })(Header);
+export default connect(mapStateToProps, {
+  showFavorites,
+  changeCurrentSong,
+  nowPlaying,
+  changeVolume,
+})(Header);

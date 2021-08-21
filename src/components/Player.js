@@ -99,9 +99,10 @@ class Player extends React.Component {
   };
 
   componentDidUpdate() {
-    const { playPause, currentSong } = this.props;
+    const { playPause, currentSong, volume } = this.props;
     if (playPause === 'playing' && currentSong) this.audioRef.current.play();
     if (playPause === 'paused' || !currentSong) this.audioRef.current.pause();
+    this.audioRef.current.volume = volume;
   }
 
   render() {
@@ -296,6 +297,7 @@ const mapStateToProps = (state) => {
     trackList: state.trackList,
     trackListIsOnScreen: state.showTrackList,
     color: state.color,
+    volume: state.volume,
   };
 };
 

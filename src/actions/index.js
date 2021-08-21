@@ -119,3 +119,7 @@ export const changeSearchOption = (searchOption) => {
 export const changeAnimationDivLeft = (value) => {
   return { type: 'CHANGE_LEFT', payload: value };
 };
+
+export const changeVolume = (value) => {
+  return { type: 'CHANGE_VOLUME', payload: value };
+};

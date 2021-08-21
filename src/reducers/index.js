@@ -13,6 +13,7 @@ import toggleSearchWindowReducer from './toggleSearchWindowReducer';
 import changeSearchOptionReducer from './changeSearchOptionReducer';
 import changeAnimationDivReducer from './changeAnimationDivReducer';
 import showFavoritesReducer from './showFavoritesReducer';
+import changeVolumeReducer from './changeVolumeReducer';
 
 export default combineReducers({
   form: reducer,
@@ -29,4 +30,5 @@ export default combineReducers({
   color: changeColorReducer,
   showSearchWindow: toggleSearchWindowReducer,
   animationDivLeft: changeAnimationDivReducer,
+  volume: changeVolumeReducer,
 });
